@@ -1,4 +1,4 @@
-# Home assistant add-ons of elvit
+# Home assistant add-ons of ElVit
 
 ## About
 
