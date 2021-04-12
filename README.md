@@ -18,6 +18,6 @@ https://github.com/elvit/hassio-addons
 
 [//]: # "ADDONLIST_START"
 
-### &#10003; [LFTP](lftp/)
+### &#10003; [LFTP](lftp-addon/)
 
 - A simple LFTP runner. Allows to up- or download files over ftp. 
