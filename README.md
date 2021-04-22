@@ -20,4 +20,4 @@ https://github.com/elvit/hassio-addons
 
 ### &#10003; [LFTP](lftp-addon/)
 
-- A simple LFTP runner. Allows to up- or download files over ftp. 
+- A simple sync tool that uses LFTP. Allows to up- or download files over ftp. 
