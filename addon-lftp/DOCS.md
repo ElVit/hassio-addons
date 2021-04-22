@@ -1,4 +1,4 @@
-# Home Assistant Add-on: LFTP
+# Home Assistant Add-on: LFTP Sync
 
 TBD
 
@@ -7,9 +7,9 @@ TBD
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
 
-1. Search for the "LFTP" add-on in the Supervisor add-on store and install it.
-1. Start the "LFTP" add-on
-1. Check the logs of the "LFTP" add-on to see if everything went well.
+1. Search for the "LFTP Sync" add-on in the Supervisor add-on store and install it.
+1. Start the "LFTP Sync" add-on
+1. Check the logs of the "LFTP Sync" add-on to see if everything went well.
 
 ## Configuration
 
