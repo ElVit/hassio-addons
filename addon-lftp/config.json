@@ -1,0 +1,48 @@
+{
+  "name": "LFTP",
+  "version": "0.0.11",
+  "slug": "lftp",
+  "description": "Sync data using lftp",
+  "startup": "application",
+  "boot": "auto",
+  "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
+
+  "map": ["config:rw", "ssl:rw", "addons:rw", "share:rw", "backup:rw", "media:rw"],
+  "homeassistant_api": true,
+  "hassio_api": true,
+  "hassio_role": "manager",
+  "stdin": true,
+
+  "options": {
+    "host": "ftp://192.168.1.1",
+    "username": "user",
+    "password": "password",
+    "remote_folder": "/remote",
+    "local_folder": "/local",
+    "direction": "download",
+    "parallel": "no",
+    "copy_hidden_files": "false",
+    "auto_confirm": "true",
+    "no_certificate_check": "true",
+    "delete": "true",
+    "verbose": "true",
+    "continue": "true",
+    "script_file": ""
+  },
+  "schema": {
+    "host": "str",
+    "username": "str",
+    "password": "str", 
+    "remote_folder": "str",
+    "local_folder": "str",
+    "direction": "list(download|upload)",
+    "parallel": "list(no|many_small_files|few_large_files)",
+    "copy_hidden_files": "bool",
+    "auto_confirm": "bool",
+    "no_certificate_check": "bool",
+    "delete": "bool",
+    "verbose": "bool",
+    "continue": "bool",
+    "script_file": "str?"
+  }
+}
