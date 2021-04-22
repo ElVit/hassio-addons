@@ -1,4 +1,4 @@
 
 ## 1.0.0
-- ::star:: First release ::star::
+- ::tada:: First release ::tada::
 - Implemented lftp functionality
