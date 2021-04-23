@@ -1,111 +1,134 @@
 # Home Assistant Add-on: LFTP Sync
 
-TBD
+A simple but powerfull addon that uses the lftp client.  
+lftp is a command-line program client for several file transfer protocols.  
+lftp can transfer files via FTP, FTPS, HTTP, HTTPS, FISH, SFTP, BitTorrent, and FTP over HTTP proxy.  
+
+This addon provides at first only some simple features of lftp like up or downloading files over ftp.  
+But advanced users may also use a lftp script file which allows you to use the full potential of lftp.  
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Home Assistant add-on.
+The installation of this add-on is pretty straightforward and not different in  
+comparison to installing any other Home Assistant add-on.  
 
-1. Search for the "LFTP Sync" add-on in the Supervisor add-on store and install it.
-1. Start the "LFTP Sync" add-on
-1. Check the logs of the "LFTP Sync" add-on to see if everything went well.
+1. [Add my Hass.io add-ons repository][repository] to your home assistant instance.  
+1. Search for the "LFTP Sync" add-on in the Supervisor add-on store and install it.  
+1. Set the add-on options to your preferences  
+1. Click the `Save` button to store your configuration.  
+1. Start the "LFTP Sync" add-on  
+1. Check the logs of the "LFTP Sync" add-on to see if everything went well.  
 
 ## Configuration
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
-Example add-on configuration:
+Example add-on configuration:  
 
 ```yaml
-TBD
+host: 'ftp://192.168.1.1'
+username: admin
+password: password
+remote_folder: /remoteDir
+local_folder: /localDir
+direction: download
+parallel: many_small_files
+copy_hidden_files: false
+auto_confirm: true
+no_certificate_check: true
+delete: true
+verbose: true
+continue: true
+script_file: /config/lftpscripts/my_script.lftp
 ```
-
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
 ### Option: `host`
 
-TBD
+The host name or ip address to the remote site.  
 
 ### Option: `username`
 
-TBD
+The username of the remote site. used for authentication.  
 
 ### Option: `password`
 
-TBD
+The password of the remote site. used for authentication.  
 
 ### Option: `local_folder`
 
-TBD
+The directory on your home assistant machine.  
+The path shall start with /config, /ssl, /addons, /share, /backup or /media.  
 
 ### Option: `remote_folder`
 
-TBD
+The directory on your remote server which you are connected over ftp.  
 
 ### Option: `direction`
 
-The minimum port to allocate for PASV style data connections. Can be used to
-specify a narrow port range to assist firewalling.
+The sync direction may be 'download' or 'upload'.  
+- download copies files from the remote folder to the local folder  
+- upload copies files from the local folder to the remote folder  
 
 ### Option: `parallel`
 
-TBD
+If this option is set to 'many_small_files' or 'few_large_files', multiple files will be copied at the same time.  
+This may accelerate your sync job but be aware that it may also slow down your machine while the sync job is running.  
 
 ### Option: `copy_hidden_files`
 
-TBD
+When true, lftp will also copy hidden files and folders  
+Hidden files/folder start always with a dot e.g. ".htaccess".  
 
 ### Option: `auto_confirm`
 
-TBD
+When true, lftp answers "yes" to all ssh questions, in particular to the question about a new host key. Otherwise it answers "no".  
 
 ### Option: `no_certificate_check`
 
-TBD
+When true, then no ssl certificate check will be done.  
 
 ### Option: `delete`
 
-TBD
+When true, lftp will delete files that are not present at the source directory.  
 
-### Option: `verbode`
+### Option: `verbose`
 
-TBD
+When true, lftp will write a diagnostic message for every processed file.  
 
 ### Option: `continue`
 
-TBD
+When true, lftp will continue a mirror job if possible.  
+That means that during a sync jobs already downloaded files will not be re-downladed.  
 
 ### Option: `script_file`
 
-TBD
+_!!! If this option contains a path that leads to a valid lftp script file, it will ignore all above options !!!_  
+With this option you may write your own lftp script file and let it execute by this addon.  
+In combination with a home assistant automation you may turn this addon in a powerfull backup solution.  
 
 ## Changelog & Releases
 
-This repository keeps a change log using [GitHub's releases][releases]
-functionality.
+Releases are based on [Semantic Versioning][semver], and use the format  
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented  
+based on the following:  
 
-Releases are based on [Semantic Versioning][semver], and use the format
-of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
-based on the following:
-
-- `MAJOR`: Incompatible or major changes.
-- `MINOR`: Backwards-compatible new features and enhancements.
-- `PATCH`: Backwards-compatible bugfixes and package updates.
+- `MAJOR`: Incompatible or major changes.  
+- `MINOR`: Backwards-compatible new features and enhancements.  
+- `PATCH`: Backwards-compatible bugfixes and package updates.  
 
 ## Support
 
 Got questions?
 
-You can simply [open an issue here][issue] GitHub.
+You can simply [open an issue here][issue] GitHub.  
 
 ## Authors & contributors
 
-The original setup of this repository is by [ElVit][elvit].
+The original setup of this repository is by [ElVit][elvit].  
 
 
 [lftp]: https://lftp.yar.ru/
 [elvit]: https://github.com/elvit
 [issue]: https://github.com/ElVit/hassio_addons/issues
-[releases]: https://github.com/ElVit/hassio_addons/releases
 [semver]: https://semver.org/lang/de/spec/v2.0.0.html
+[repository]: https://github.com/ElVit/hassio_addons

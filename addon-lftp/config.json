@@ -10,7 +10,6 @@
   "map": ["config:rw", "ssl:rw", "addons:rw", "share:rw", "backup:rw", "media:rw"],
   "homeassistant_api": true,
   "hassio_api": true,
-  "hassio_role": "manager",
   "stdin": true,
 
   "options": {
