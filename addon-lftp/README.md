@@ -3,9 +3,9 @@
 
 ## About
 
-A simple but powerfull addon that uses the lftp client.
-You may use it to sync (download) files from any ftp location to a home assistant directory.
-But it is also possible to sync (upload) almost any directory from your home assistant instance to a ftp directory.
+A simple but powerfull addon that uses the lftp client.  
+You may use it to sync (download) files from any ftp location to a home assistant directory.  
+But it is also possible to sync (upload) almost any directory from your home assistant instance to a ftp directory.  
 
 [repository]: https://github.com/ElVit/hassio_addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
