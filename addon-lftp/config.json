@@ -21,13 +21,12 @@
     "local_folder": "/local",
     "direction": "download",
     "parallel": "no",
-    "copy_hidden_files": "false",
-    "auto_confirm": "true",
-    "no_certificate_check": "true",
-    "delete": "true",
-    "verbose": "true",
-    "continue": "true",
-    "script_file": ""
+    "copy_hidden_files": false,
+    "auto_confirm": true,
+    "no_certificate_check": true,
+    "delete": true,
+    "verbose": true,
+    "continue": true
   },
   "schema": {
     "host": "str",
