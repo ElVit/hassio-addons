@@ -106,6 +106,6 @@ The original setup of this repository is by [ElVit][elvit].
 
 [lftp]: https://lftp.yar.ru/
 [elvit]: https://github.com/elvit
-[issue]: https://github.com/elvit/hassio-addons/addon-lftp/issues
-[releases]: https://github.com/elvit/hassio-addons/addon-lftp/releases
-[semver]: http://semver.org/spec/v2.0.0.htm
+[issue]: https://github.com/ElVit/hassio_addons/issues
+[releases]: https://github.com/ElVit/hassio_addons/releases
+[semver]: https://semver.org/lang/de/spec/v2.0.0.html
