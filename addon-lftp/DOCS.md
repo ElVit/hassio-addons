@@ -102,3 +102,10 @@ You can simply [open an issue here][issue] GitHub.
 ## Authors & contributors
 
 The original setup of this repository is by [ElVit][elvit].
+
+
+[lftp]: https://lftp.yar.ru/
+[elvit]: https://github.com/elvit
+[issue]: https://github.com/elvit/hassio-addons/addon-lftp/issues
+[releases]: https://github.com/elvit/hassio-addons/addon-lftp/releases
+[semver]: http://semver.org/spec/v2.0.0.htm
