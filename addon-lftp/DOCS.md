@@ -5,12 +5,11 @@ lftp is a command-line program client for several file transfer protocols.
 lftp can transfer files via FTP, FTPS, HTTP, HTTPS, FISH, SFTP, BitTorrent, and FTP over HTTP proxy.  
 
 This addon provides at first only some simple features of lftp like up or downloading files over ftp.  
-But advanced users may also use a lftp script file which allows you to use the full potential of lftp.  
+But advanced users may also use a lftp script file which allows them to use the full potential of lftp.  
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in  
-comparison to installing any other Home Assistant add-on.  
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
 
 1. [Add my Hass.io add-ons repository][repository] to your home assistant instance.  
 1. Search for the "LFTP Sync" add-on in the Supervisor add-on store and install it.  
@@ -104,13 +103,25 @@ That means that during a sync jobs already downloaded files will not be re-downl
 
 _!!! If this option contains a path that leads to a valid lftp script file, it will ignore all above options !!!_  
 With this option you may write your own lftp script file and let it execute by this addon.  
+
+Here an example:  
+```
+set sftp:auto-confirm yes
+set ssl:verify-certificate no
+open ftp://192.168.1.1
+user admin password
+lcd /share/mydir1
+cd /remote/mydir2
+mirror --continue --delete --verbose --parallel=100
+bye
+```
+
 In combination with a home assistant automation you may turn this addon in a powerfull backup solution.  
 
 ## Changelog & Releases
 
-Releases are based on [Semantic Versioning][semver], and use the format  
-of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented  
-based on the following:  
+Releases are based on [Semantic Versioning][semver], and use the format of `MAJOR.MINOR.PATCH`.  
+In a nutshell, the version will be incremented based on the following:  
 
 - `MAJOR`: Incompatible or major changes.  
 - `MINOR`: Backwards-compatible new features and enhancements.  

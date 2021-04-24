@@ -19,6 +19,6 @@ https://github.com/elvit/hassio-addons
 
 ### &#10003; [LFTP Sync](lftp-addon/)
 
-- A simple sync tool that uses LFTP. Allows to up- or download files over (s)ftp. 
+- A simple sync tool that uses the lftp client. Allows to up- or download almost any file from/to a remote share. 
 
 [//]: # "ADDONLIST_END"
