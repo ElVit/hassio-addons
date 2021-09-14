@@ -3,5 +3,5 @@
 - ::tada:: First release ::tada::
 - Implemented lftp functionality
 
-## 1.0.1
+## 1.1.0
 - Added 'exclude_glob' option
