@@ -25,11 +25,11 @@ The installation of this add-on is pretty straightforward and not different in c
 Example add-on configuration:  
 
 ```yaml
-host: 'ftp://192.168.1.1'
+host: ftp://192.168.1.1
 username: admin
 password: password
 remote_folder: /remoteDir
-local_folder: /localDir
+local_folder: /share/localDir
 direction: download
 parallel: many_small_files
 copy_hidden_files: false
@@ -77,6 +77,12 @@ This may accelerate your sync job but be aware that it may also slow down your m
 
 When true, lftp will also copy hidden files and folders  
 Hidden files/folder start always with a dot e.g. ".htaccess".  
+
+### Option `exclude_glob`
+
+Globally exclude files that match the given patterns.  
+These files will not be copied from the source directory to the destination directory.  
+A valid pattern may be e.g. '*.db'  
 
 ### Option: `auto_confirm`
 
