@@ -38,6 +38,8 @@ no_certificate_check: true
 delete: true
 verbose: true
 continue: true
+exclude_glob:
+- '*.DS_Store'
 script_file: /config/lftpscripts/my_script.lftp
 ```
 
@@ -78,11 +80,11 @@ This may accelerate your sync job but be aware that it may also slow down your m
 When true, lftp will also copy hidden files and folders  
 Hidden files/folder start always with a dot e.g. ".htaccess".  
 
-### Option `exclude_glob`
+### Option: `exclude_glob`
 
 Globally exclude files that match the given patterns.  
 These files will not be copied from the source directory to the destination directory.  
-A valid pattern may be e.g. '*.db'  
+A valid pattern may be e.g. '*.DS_Store'  
 
 ### Option: `auto_confirm`
 
@@ -112,16 +114,18 @@ With this option you may write your own lftp script file and let it execute by t
 
 Here an example:  
 ```
+set ftp:list-options -a
 set sftp:auto-confirm yes
 set ssl:verify-certificate no
 open ftp://192.168.1.1
 user admin password
 lcd /share/mydir1
 cd /remote/mydir2
-mirror --continue --delete --verbose --parallel=100
+mirror --continue --delete --verbose --parallel=100 --exclude_glob='*.DS_Store'
 bye
 ```
 
+For more information to the lftp commands and parameters plese see the official [General Commands Manual][lftp].  
 In combination with a home assistant automation you may turn this addon in a powerfull backup solution.  
 
 ## Changelog & Releases
@@ -137,14 +141,14 @@ In a nutshell, the version will be incremented based on the following:
 
 Got questions?
 
-You can simply [open an issue here][issue] GitHub.  
+You can simply [open an issue here][issue] on GitHub.  
 
 ## Authors & contributors
 
-The original setup of this repository is by [ElVit][elvit].  
+The original setup of this repository is made by [ElVit][elvit].  
 
 
-[lftp]: https://lftp.yar.ru/
+[lftp]: https://lftp.yar.ru/lftp-man.html
 [elvit]: https://github.com/elvit
 [issue]: https://github.com/elvit/hassio-addons/issues
 [semver]: https://semver.org/lang/de/spec/v2.0.0.html

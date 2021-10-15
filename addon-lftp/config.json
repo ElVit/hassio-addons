@@ -1,6 +1,6 @@
 {
   "name": "LFTP Sync",
-  "version": "1.1.0",
+  "version": "0.2.3",
   "slug": "lftp-sync",
   "description": "Sync data using lftp",
   "startup": "application",

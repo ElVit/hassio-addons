@@ -85,7 +85,7 @@ MIRROR="${MIRROR}; "
 bashio::log.info "Start mirror job with lftp\n from '${RCD}'\n to '${LCD}'"
 
 if bashio::config.has_value 'script_file'; then
-  if bashio::fs.file_exists 'script_file'; then
+  if bashio::fs.file_exists "${FILE}"; then
     bashio::log.info "using script_file (-f):\n located at ${FILE}"
     lftp -f "${FILE}"
   else
