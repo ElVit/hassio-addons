@@ -1,6 +1,6 @@
 
 ## 0.1.0
-- ::tada:: First release ::tada::
+- 🎉 First release 🎉
 - Implemented lftp functionality
 
 ## 0.2.0

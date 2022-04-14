@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Start netatalk service
+# ==============================================================================
+
+bashio::log.info "Starting netatalk ..."
+exec afpd -d -F /etc/netatalk/afp.conf

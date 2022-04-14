@@ -28,19 +28,20 @@ Example add-on configuration:
 host: ftp://192.168.1.1
 username: admin
 password: password
-remote_folder: /remoteDir
-local_folder: /share/localDir
+remote-folder: /remoteDir
+local-folder: /share/localDir
 direction: download
-parallel: many_small_files
-copy_hidden_files: false
-auto_confirm: true
-no_certificate_check: true
+parallel: many-small-files
+copy-hidden-files: false
+auto-confirm: true
+no-certificate-check: true
 delete: true
 verbose: true
 continue: true
-exclude_glob:
+dry-run: false
+exclude-glob:
 - '*.DS_Store'
-script_file: /config/lftpscripts/my_script.lftp
+script-file: /config/lftpscripts/my_script.lftp
 ```
 
 ### Option: `host`
@@ -72,7 +73,7 @@ The sync direction may be 'download' or 'upload'.
 
 ### Option: `parallel`
 
-If this option is set to 'many_small_files' or 'few_large_files', multiple files will be copied at the same time.  
+If this option is set to 'many-small-files' or 'few-large-files', multiple files will be copied at the same time.  
 This may accelerate your sync job but be aware that it may also slow down your machine while the sync job is running.  
 
 ### Option: `copy_hidden_files`
@@ -106,6 +107,11 @@ When true, lftp will write a diagnostic message for every processed file.
 
 When true, lftp will continue a mirror job if possible.  
 That means that during a sync jobs already downloaded files will not be re-downladed.  
+
+### Option: `dry_run`
+
+When true, lftp will not copy any files but only write the commands to the log.  
+Usefull to just check which files will be copied.  
 
 ### Option: `script_file`
 

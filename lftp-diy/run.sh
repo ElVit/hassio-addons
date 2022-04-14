@@ -47,6 +47,11 @@ COMMANDS="${COMMANDS}cd ${RCD}; "
 ### Mirror OPTS ###
 MIRROR="mirror"
 
+if bashio::config.true 'dry_run'; then
+  # write lftp commands to the log, but don't execute them
+  MIRROR="${MIRROR} --dry-run"
+fi
+
 if bashio::config.true 'continue'; then
   # do not redownload files if they were deleted during a mirror job
   MIRROR="${MIRROR} --continue"
@@ -68,9 +73,9 @@ if bashio::config.equals 'direction' 'upload'; then
 fi
 
 # https://superuser.com/questions/75681/inverse-multiplexing-to-speed-up-file-transfer
-if bashio::config.equals 'parallel' 'many_small_files'; then
+if bashio::config.equals 'parallel' 'many-small-files'; then
   MIRROR="${MIRROR} --parallel=100"
-elif bashio::config.equals 'parallel' 'few_large_files'; then
+elif bashio::config.equals 'parallel' 'few-large-files'; then
   MIRROR="${MIRROR} --parallel=2 --use-pget-n=10"
 fi
 
@@ -86,10 +91,10 @@ bashio::log.info "Start mirror job with lftp\n from '${RCD}'\n to '${LCD}'"
 
 if bashio::config.has_value 'script_file'; then
   if bashio::fs.file_exists "${FILE}"; then
-    bashio::log.info "using script_file (-f):\n located at ${FILE}"
+    bashio::log.info "using script file (-f):\n located at ${FILE}"
     lftp -f "${FILE}"
   else
-    bashio::exit.nok "The script_file '${FILE}' does not exist."
+    bashio::exit.nok "The script file '${FILE}' does not exist."
   fi
 else
   bashio::log.info "using commands (-c):\n ${SETTINGS}\n open ${HOST};\n user ${USER} *****;\n lcd ${LCD};\n cd ${RCD};\n ${MIRROR}"
