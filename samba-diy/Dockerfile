@@ -5,8 +5,7 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 # Setup base
-RUN \
-    apk add --no-cache \
+RUN apk add --no-cache \
         samba-common-tools \
         samba-server \
     \

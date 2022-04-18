@@ -1,10 +1,11 @@
-name: Netatalk share - diy
+name: Netatalk share - DIY
 description: Expose Home Assistant folders with AFP
-version: 0.0.25
+version: 0.0.51
 slug: netatalk-diy
 url: https://github.com/ElVit/hassio-addons/netatalk-diy
 startup: services
 init: false
+hassio_role: default
 hassio_api: true
 host_network: true
 ports:
@@ -25,12 +26,14 @@ map:
   - share:rw
   - ssl:rw
 options:
-  username: test
+  username: testuser
   password: null
-  spotlight: true
-  zeroconf: true
+  config_dir: /config/addons-config/netatalk
+  netatalk_share_dir: /share/netatalk_share
+  timemachine_dir: /share/timemachine
 schema:
   username: str
   password: password
-  spotlight: bool
-  zeroconf: bool
+  config_dir: str
+  netatalk_share_dir: str
+  timemachine_dir: str

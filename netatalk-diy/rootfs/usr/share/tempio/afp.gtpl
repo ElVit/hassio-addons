@@ -14,12 +14,12 @@
   ; set the Mac model for Avahi icons
   mimic model = Xserve
   ; Whether to enable Spotlight searches. Note: once the global option is enabled, any volume that is not enabled won't be searchable at all. See also dbus daemon option.
-  spotlight = {{ .spotlight }}
+  spotlight = true
   ; Whether to use automatic Zeroconf service registration if Avahi or mDNSResponder were compiled in.
-  zeroconf = {{ .zeroconf }}
+  zeroconf = true
 
 [{{ .username }} - Shared]
-  path = /share/afp/share
+  path = /share/afp/shared
   valid users = @netatalk-files
 
 [{{ .username }} - Time Machine]

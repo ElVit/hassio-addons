@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Start netatalk service
+# Start afpd service
 # ==============================================================================
 
-bashio::log.info "Starting netatalk ..."
-exec afpd -d -F /etc/netatalk/afp.conf
+bashio::log.info "Starting afpd ..."
+exec afpd -d

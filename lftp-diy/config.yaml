@@ -1,4 +1,4 @@
-name: LFTP sync - diy
+name: LFTP sync - DIY
 description: Sync data using lftp
 version: 0.3.0
 slug: lftp-diy

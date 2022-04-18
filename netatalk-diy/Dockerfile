@@ -4,8 +4,10 @@ FROM $BUILD_FROM
 # Add env
 ENV LANG C.UTF-8
 
-# Setup base
-RUN apk add --no-cache netatalk
+RUN apk add --no-cache \
+        #dbus \
+        #avahi \
+        netatalk
 
 # Copy data
 COPY rootfs /

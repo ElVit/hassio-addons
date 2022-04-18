@@ -1,6 +1,6 @@
-name: Samba share - diy
+name: Samba share - DIY
 description: Expose Home Assistant folders with SMB/CIFS
-version: 9.5.1
+version: 0.0.19
 slug: samba-diy
 url: https://github.com/ElVit/hassio-addons/samba-diy
 startup: services
@@ -23,27 +23,12 @@ map:
 options:
   workgroup: WORKGROUP
   logins:
-    - username: user1
-      password: password1
-  allow_hosts:
-    - "10.0.0.0/8"
-    - "172.16.0.0/12"
-    - "192.168.0.0/16"
-    - "fe80::/10"
-  veto_files:
-    - "._*"
-    - ".DS_Store"
-    - "Thumbs.db"
-    - "icon?"
-    - ".Trashes"
-  compatibility_mode: false
+    - username: testuser
+      password: null
+  config_dir: /config/addons-config/samba
 schema:
   workgroup: str
   logins:
     - username: str
-      password: str
-  allow_hosts:
-    - str
-  veto_files:
-    - str
-  compatibility_mode: bool
+      password: password
+  config_dir: str
