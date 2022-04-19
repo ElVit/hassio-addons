@@ -4,7 +4,7 @@
 A simple Add-on which sets up a netatalk server.  
 It allows you to share files in your local network over the AFP protocol.  
 
-This addon is for advanced user and requires knowledge how to write a [afp.conf][afp-conf] file.  
+This addon is for advanced users and requires knowledge of how to write an [afp.conf][afp-conf] file.  
 
 [afp-conf]: https://netatalk.sourceforge.io/3.1/htmldocs/afp.conf.5.html
 [repository]: https://github.com/elvit/hassio-addons
