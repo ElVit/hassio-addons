@@ -1,4 +1,4 @@
-name: Netatalk share - Mod
+name: Netatalk share
 description: Expose Home Assistant folders with AFP
 version: 0.1.0
 slug: netatalk-mod

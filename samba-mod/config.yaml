@@ -1,4 +1,4 @@
-name: Samba share - Mod
+name: Samba share
 description: Expose Home Assistant folders with SMB/CIFS
 version: 0.1.0
 slug: samba-mod

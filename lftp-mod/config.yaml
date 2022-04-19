@@ -1,6 +1,6 @@
-name: LFTP sync - mod
+name: LFTP sync
 description: Sync data using lftp
-version: 0.3.9
+version: 0.1.0
 slug: lftp-mod
 url: https://github.com/ElVit/hassio-addons/lftp-mod
 startup: once
