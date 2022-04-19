@@ -23,7 +23,7 @@ map:
   - ssl:rw
 options:
   logins:
-    - username: testuser
+    - username: homeassistant
       password: null
   config_dir: /config/addons-config/samba
 schema:
