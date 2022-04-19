@@ -1,21 +1,15 @@
 # Home Assistant Add-on: LFTP sync
 
-A simple addon that uses the lftp client.  
-lftp is a command-line program client for several file transfer protocols.  
-lftp can transfer files via FTP, FTPS, HTTP, HTTPS, FISH, SFTP, BitTorrent, and FTP over HTTP proxy.  
-
-This addon is for advanced user and requires knowledge how to write a [lftp script][lftp].  
-
 ## Installation
 
 The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
 
 1. [Add my Hass.io add-ons repository][repository] to your home assistant instance.  
-1. Search for the "LFTP Sync" add-on in the Supervisor add-on store and install it.  
+1. Search for the "LFTP sync" add-on in the Supervisor add-on store and install it.  
 1. Set the add-on options to your preferences  
 1. Click the `Save` button to store your configuration.  
-1. Start the "LFTP Sync" add-on  
-1. Check the logs of the "LFTP Sync" add-on to see if everything went well.  
+1. Start the "LFTP sync" add-on  
+1. Check the logs of the "LFTP sync" add-on to see if everything went well.  
 
 ## Configuration
 
