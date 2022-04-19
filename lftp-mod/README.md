@@ -3,9 +3,9 @@
 
 ## About
 
-A simple addon that uses the lftp client.  
-lftp is a command-line program client for several file transfer protocols.  
-lftp can transfer files via FTP, FTPS, HTTP, HTTPS, FISH, SFTP, BitTorrent, and FTP over HTTP proxy.  
+A simple addon that uses the LFTP client.  
+LFTP is a command-line program client for several file transfer protocols.  
+LFTP can transfer files via FTP, FTPS, HTTP, HTTPS, FISH, SFTP, BitTorrent, and FTP over HTTP proxy.  
 
 This addon is for advanced user and requires knowledge how to write a [lftp script][lftp].  
 
