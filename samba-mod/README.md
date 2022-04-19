@@ -4,7 +4,7 @@
 A simple Add-on which sets up a samba server.  
 It allows you to share files in your local network over the SMB protocol.  
 
-This addon is for advanced user and requires knowledge how to write a [smb.conf][smb-conf] file.  
+This addon is for advanced users and requires knowledge of how to write a [smb.conf][smb-conf] file.  
 
 [smb-conf]: https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
 [repository]: https://github.com/elvit/hassio-addons
