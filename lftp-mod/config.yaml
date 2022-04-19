@@ -1,0 +1,31 @@
+name: LFTP sync - mod
+description: Sync data using lftp
+version: 0.3.9
+slug: lftp-mod
+url: https://github.com/ElVit/hassio-addons/lftp-mod
+startup: once
+boot: auto
+homeassistant_api: true
+hassio_api: true
+stdin: true
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+map:
+  - addons:rw
+  - backup:rw
+  - config:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
+options:
+  username: user
+  password: null
+  script_dir: "/config/addons-config/lftp"
+schema:
+  username: str
+  password: password
+  script_dir: str
