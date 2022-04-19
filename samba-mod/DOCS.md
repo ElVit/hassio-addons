@@ -2,15 +2,18 @@
 
 ## Installation
 
-TBD
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
 
-## How to use
-
-TBD
+1. [Add my Hass.io add-ons repository][repository] to your home assistant instance.  
+1. Search for the "Samba share" add-on in the Supervisor add-on store and install it.  
+1. Set the add-on options to your preferences  
+1. Click the `Save` button to store your configuration.  
+1. Start the "Samba share" add-on  
+1. Check the logs of the "Samba share" add-on to see if everything went well.  
 
 ## Configuration
 
-Add-on configuration:
+Example add-on configuration:  
 
 ```yaml
 logins:
@@ -18,3 +21,41 @@ logins:
     password: YOUR_PASSWORD
 config_dir: /config/addons-config/samba
 ```
+
+### Option: `username`
+
+A username to authenticate against the samba server.  
+
+### Option: `password`
+
+A password to authenticate against the samba server.  
+
+### Option: `config_dir`
+
+The directory where the smb.conf file shall be stored.  
+Each time the addon is started the smb.conf file is copied to the original directory where it will be used.  
+
+## Changelog & Releases
+
+Releases are based on [Semantic Versioning][semver], and use the format of `MAJOR.MINOR.PATCH`.  
+In a nutshell, the version will be incremented based on the following:  
+
+- `MAJOR`: Incompatible or major changes.  
+- `MINOR`: Backwards-compatible new features and enhancements.  
+- `PATCH`: Backwards-compatible bugfixes and package updates.  
+
+## Support
+
+Got questions?
+
+You can simply [open an issue here][issue] on GitHub.  
+
+## Authors & contributors
+
+The original setup of this repository is made by [ElVit][elvit].  
+
+
+[elvit]: https://github.com/elvit
+[issue]: https://github.com/elvit/hassio-addons/issues
+[semver]: https://semver.org/lang/de/spec/v2.0.0.html
+[repository]: https://github.com/elvit/hassio-addons
