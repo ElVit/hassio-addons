@@ -1,6 +1,5 @@
 ; http://netatalk.sourceforge.net/3.1/htmldocs/afp.conf.5.html
 [Global]
-  mimic model = TimeCapsule6,106
   ; output log entries to stdout instead of syslog
   ; it is the docker way where the engine in turn
   ; can direct the log output to a storage backend
@@ -13,7 +12,7 @@
   ; Sets a message to be displayed when clients logon to the server. The message should be in unix charset and should be quoted. Extended characters are allowed.
   login message = Welcome to {{ env "HOSTNAME" }}!
   ; set the Mac model for Avahi icons
-  mimic model = Xserve
+  mimic model = AirPort
   ; Whether to enable Spotlight searches. Note: once the global option is enabled, any volume that is not enabled won't be searchable at all. See also dbus daemon option.
   spotlight = yes
   ; Whether to use automatic Zeroconf service registration if Avahi or mDNSResponder were compiled in.

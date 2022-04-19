@@ -26,7 +26,7 @@ if [ ! -f "$config_dir/afp.conf" ]; then
   HOSTNAME=$(bashio::info.hostname)
   if bashio::var.is_empty "${HOSTNAME}"; then
     bashio::log.warning "Can't read hostname, using default."
-    HOSTNAME="hassio"
+    HOSTNAME="homeassistant"
   fi
   bashio::log.info "Using hostname '${HOSTNAME}'"
 
