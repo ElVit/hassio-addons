@@ -21,7 +21,6 @@ https://github.com/elvit/hassio-addons
 
 - A simple sync tool that uses the lftp client. Allows to up- or download almost any file from/to a remote share. 
 
-
 ### &#10003; [Samba share](samba-mod/)
 
 - A simple samba (smb) server with modifiable configuration file. 
