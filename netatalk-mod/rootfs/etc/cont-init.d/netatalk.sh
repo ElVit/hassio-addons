@@ -17,7 +17,7 @@ fi
 config_dir=$(bashio::config 'config_dir')
 if [ ! -d "$config_dir" ]; then
   bashio::log.info "Creating config directory '${config_dir}' ..."
-  mkdir -p $config_dir
+  mkdir -v -p $config_dir
 fi
 
 # Check if afp.conf exists in config_dir
@@ -42,8 +42,8 @@ if [ ! -f "$config_dir/afp.conf" ]; then
       -out $config_dir/afp.conf
 
   # Create default share directories
-  mkdir -p /share/netatalk-shared
-  mkdir -p /share/timemachine
+  mkdir -v -p /share/netatalk-shared
+  mkdir -v -p /share/timemachine
 else
   bashio::log.info "Found afp.conf in config directory."
 fi

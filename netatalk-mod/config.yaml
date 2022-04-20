@@ -1,6 +1,6 @@
 name: Netatalk share
 description: Expose Home Assistant folders with AFP
-version: 0.1.2
+version: 0.1.0
 slug: netatalk-mod
 url: https://github.com/ElVit/hassio-addons/netatalk-mod
 startup: services

@@ -17,7 +17,7 @@ fi
 config_dir=$(bashio::config 'config_dir')
 if [ ! -d "$config_dir" ]; then
   bashio::log.info "Creating config directory '${config_dir}' ..."
-  mkdir -p $config_dir
+  mkdir -v -p $config_dir
 fi
 
 # Check if smb.conf exists in config_dir

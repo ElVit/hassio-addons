@@ -15,7 +15,7 @@ bashio::log.info "=== addon start ==="
 script_dir=$(bashio::config 'script_dir')
 if [ ! -d "$script_dir" ]; then
   bashio::log.info "Creating script directory '${script_dir}' ..."
-  mkdir -p $script_dir
+  mkdir -v -p $script_dir
 else
   bashio::log.info "Found script directory '${script_dir}'."
 fi
