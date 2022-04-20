@@ -7,6 +7,9 @@ declare script_dir
 # LFTP commands: http://lftp.yar.ru/lftp-man.html
 
 bashio::log.info "=== addon start ==="
+bashio::log.info "Using LFTP version:"
+lftp --version
+bashio::log.info "-----------------------"
 
 # ToDo: DOCS ergänzen
 # - https://superuser.com/questions/75681/inverse-multiplexing-to-speed-up-file-transfer

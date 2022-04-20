@@ -8,6 +8,11 @@ declare config_dir
 declare interface
 export HOSTNAME
 
+bashio::log.info "=== addon start ==="
+bashio::log.info "Using Netatalk version:"
+netatalk -v
+bashio::log.info "-----------------------"
+
 # Check Login data
 if ! bashio::config.has_value 'logins[0].username' || ! bashio::config.has_value 'logins[0].password'; then
   bashio::exit.nok "Setting a username and password is required!"
