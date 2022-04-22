@@ -17,15 +17,15 @@ https://github.com/elvit/hassio-addons
 
 [//]: # "ADDONLIST_START"
 
-### &#10003; [LFTP sync](lftp-mod/)
+### &#10003; [Rclone](rclone-conf/)
 
-- A simple sync tool that uses the lftp client. Allows to up- or download almost any file from/to a remote share. 
+- A simple sync tool that uses the rclone command-line program. Allows to up- or download almost any file from/to a remote share. 
 
-### &#10003; [Samba share](samba-mod/)
+### &#10003; [Samba share](samba-conf/)
 
 - A simple samba (smb) server with modifiable configuration file. 
 
-### &#10003; [Netatalk share](netatalk-mod/)
+### &#10003; [Netatalk share](netatalk-conf/)
 
 - A simple netatalk (afp) server with modifiable configuration file. 
 
