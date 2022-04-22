@@ -6,7 +6,6 @@ ARG BUILD_VERSION
 ARG RCLONE_VERSION
 
 RUN if [ "${BUILD_ARCH}" == "aarch64" ]; then BUILD_ARCH=arm64; \
-    elif [ "${BUILD_ARCH}" == "amd64" ]; then BUILD_ARCH=amd64; \
     elif [ "${BUILD_ARCH}" == "armhf" ]; then BUILD_ARCH=arm-v7; \
     elif [ "${BUILD_ARCH}" == "armv7" ]; then BUILD_ARCH=arm-v7; \
     elif [ "${BUILD_ARCH}" == "i386" ]; then BUILD_ARCH=386; \
