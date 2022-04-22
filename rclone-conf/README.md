@@ -3,7 +3,7 @@
 
 ## About
 
-A simple addon that uses Rsync.  
+A simple addon that uses Rclone.  
 Rclone is a command-line program to manage files on cloud storage.  
 
 This addon is for advanced users and requires knowledge of how rsync works.  
