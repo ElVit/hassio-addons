@@ -73,20 +73,40 @@ Recommanded options are:
 - --verbose: rclone will tell you about each file that is transferred and a small number of significant events.  
 - --dry-run: Do a trial run with no permanent changes. Use this to see what rclone would do without actually doing it. Useful when setting up the sync command which deletes files in the destination.  
 
-## Automations
+## Automation
 
-This add-on can easily be used with an automation. For instance:
+You may create an automation in home assistant if you want to run the lftp scripts scheduled.  
+For example:
 
 ```yaml
 - id: home_assistant_run_backup
   alias: Home Assistant backup
   trigger:
     platform: time
-    at: '07:30'
+    at: '01:00'
   action:
     service: hassio.addon_start
     data_template:
-      addon: 32de6d38_rclone
+      addon: 8b00f271_rclone-conf
 ```
 
-Which will run all Rclone jobs at 07:30 in the morning.
+This will run all Rclone jobs configured in this addon at 01:00 in the morning.  
+
+## Changelog & Releases
+
+Releases are based on [Semantic Versioning](https://semver.org/lang/de/spec/v2.0.0.html), and use the format of `MAJOR.MINOR.PATCH`.  
+In a nutshell, the version will be incremented based on the following:  
+
+- `MAJOR`: Incompatible or major changes.  
+- `MINOR`: Backwards-compatible new features and enhancements.  
+- `PATCH`: Backwards-compatible bugfixes and package updates.  
+
+## Support
+
+Got questions?
+
+You can simply [open an issue here](https://github.com/elvit/hassio-addons/issues) on GitHub.  
+
+## Authors & contributors
+
+The original setup of this repository is made by [ElVit](https://github.com/elvit).  

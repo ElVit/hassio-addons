@@ -11,9 +11,19 @@ ENV LANG C.UTF-8
 # Setup base
 RUN apk add --no-cache \
         netatalk \
-        dbus \
         avahi \
+        # avahi \
+        # avahi-compat-libdns_sd \
+        # avahi-tools \
+        # dbus \
+        # db \
+        # tracker-miners \
     && sed -i 's/#enable-dbus=.*/enable-dbus=no/g' /etc/avahi/avahi-daemon.conf
+
+# RUN apk add --no-cache git autoconf libtool automake pkgconfig db libgcrypt tracker avahi dbus \
+#     && git clone git://git.code.sf.net/p/netatalk/code netatalk-code \
+#     && cd netatalk \
+#     && ./bootstrap
 
 # Copy data
 COPY rootfs /

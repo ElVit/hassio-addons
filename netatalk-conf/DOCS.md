@@ -41,7 +41,7 @@ Each time the addon is started the afp.conf file is copied to the original direc
 
 ## Changelog & Releases
 
-Releases are based on [Semantic Versioning][semver], and use the format of `MAJOR.MINOR.PATCH`.  
+Releases are based on [Semantic Versioning](https://semver.org/lang/de/spec/v2.0.0.html), and use the format of `MAJOR.MINOR.PATCH`.  
 In a nutshell, the version will be incremented based on the following:  
 
 - `MAJOR`: Incompatible or major changes.  
@@ -52,13 +52,8 @@ In a nutshell, the version will be incremented based on the following:
 
 Got questions?
 
-You can simply [open an issue here][issue] on GitHub.  
+You can simply [open an issue here](https://github.com/elvit/hassio-addons/issues) on GitHub.  
 
 ## Authors & contributors
 
-The original setup of this repository is made by [ElVit][elvit].  
-
-
-[elvit]: https://github.com/elvit
-[issue]: https://github.com/elvit/hassio-addons/issues
-[semver]: https://semver.org/lang/de/spec/v2.0.0.html
+The original setup of this repository is made by [ElVit](https://github.com/elvit).  

@@ -27,7 +27,8 @@ if [ ! -f "$configPath" ]; then
 fi
 
 bashio::log.info "Copy user edited config file to /root/.config/rclone/rclone.conf ..."
-mkdir -p /root/.config/rclone && cp -v $configPath /root/.config/rclone/rclone.conf
+mkdir -p /root/.config/rclone
+cp -v $configPath /root/.config/rclone/rclone.conf
 
 for jobId in $(bashio::config 'jobs|keys'); do
   name=$(bashio::config "jobs[${jobId}].name")

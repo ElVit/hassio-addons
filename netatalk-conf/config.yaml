@@ -1,4 +1,4 @@
-name: Netatalk share
+name: Netatalk config
 description: Expose Home Assistant folders with AFP
 version: 0.1.0
 slug: netatalk-conf
@@ -8,12 +8,6 @@ init: false
 boot: auto
 hassio_role: admin
 full_access: true
-privileged:
-  - NET_ADMIN
-  - SYS_ADMIN
-  - SYS_RAWIO
-  - SYS_RESOURCE
-  - SYS_MODULE
 hassio_api: true
 host_network: true
 host_dbus: true
