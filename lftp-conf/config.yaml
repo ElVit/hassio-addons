@@ -28,10 +28,10 @@ options:
   credentials:
     - url: 192.168.100.100
       username: dummyUser
-      password: dummyPassowrd
+      password: null
 schema:
   script_dir: str
   credentials:
     - url: str
       username: str
-      password: str
+      password: password

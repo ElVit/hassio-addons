@@ -26,7 +26,7 @@ map:
 options:
   config_dir: /config/addons-config/samba
   logins:
-    - username: homeassistant
+    - username: dummyUser
       password: null
 schema:
   config_dir: str

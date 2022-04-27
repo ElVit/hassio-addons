@@ -13,15 +13,13 @@ The installation of this add-on is pretty straightforward and not different in c
 
 ## Configuration
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
-
 Example add-on configuration:  
 
 ```yaml
-logins:
-  - username: homeassistant
-    password: YOUR_PASSWORD
 config_dir: /config/addons-config/netatalk
+logins:
+  - username: dummyUser
+    password: dummyPassword
 ```
 
 ## Options:

@@ -25,15 +25,13 @@ options:
   config_file: /config/addons-config/rclone/rclone.conf
   jobs:
     - name: Sync job
+      commands: sync --dry-run --verbose
       source: /share/sourceDir
       destination: DummyRemote:/destinationDir
-      command: sync
-      options: --dry-run --verbose
 schema:
   config_file: str
   jobs:
     - name: str
+      commands: str
       source: str
       destination: str
-      command: str
-      options: str

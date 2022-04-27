@@ -7,8 +7,7 @@ declare jobs
 declare name
 declare source
 declare destination
-declare command
-declare options
+declare commands
 
 configPath=$(bashio::config 'config_file')
 configDir="$(dirname "${configPath}")"
@@ -32,8 +31,7 @@ cp -v $configPath /root/.config/rclone/rclone.conf
 
 for jobId in $(bashio::config 'jobs|keys'); do
   name=$(bashio::config "jobs[${jobId}].name")
-  command=$(bashio::config "jobs[${jobId}].command")
-  options=$(bashio::config "jobs[${jobId}].options")
+  commands=$(bashio::config "jobs[${jobId}].commands")
   source=$(bashio::config "jobs[${jobId}].source")
   destination=$(bashio::config "jobs[${jobId}].destination")
 
@@ -43,7 +41,7 @@ for jobId in $(bashio::config 'jobs|keys'); do
   rclone lsd ${destination}
 
   bashio::log.info "Starting rsync job '${name}'..."
-  rclone ${command} ${options} ${source} ${destination}
+  rclone ${commands} ${source} ${destination}
   bashio::log.info "Completed rsync job '${name}''."
 done
 

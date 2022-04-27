@@ -16,10 +16,10 @@ The installation of this add-on is pretty straightforward and not different in c
 Example add-on configuration:  
 
 ```yaml
-logins:
-  - username: homeassistant
-    password: YOUR_PASSWORD
 config_dir: /config/addons-config/samba
+logins:
+  - username: dummyUser
+    password: dummyPassword
 ```
 
 ## Options:
@@ -48,10 +48,14 @@ In a nutshell, the version will be incremented based on the following:
 
 ## Support
 
-Got questions?
+Got questions?  
 
-You can simply [open an issue here](https://github.com/elvit/hassio-addons/issues) on GitHub.  
+You can simply [open an issue here](https://github.chttps://github.com/home-assistant/addons/tree/master/sambaom/elvit/hassio-addons/issues) on GitHub.  
 
 ## Authors & contributors
 
 The original setup of this repository is made by [ElVit](https://github.com/elvit).  
+
+The following repository helped me by developing this addon:
+- [Official Samba share addon](https://github.com/home-assistant/addons/tree/master/samba)
+- [Samba NAS addon from dianlight](https://github.com/dianlight/hassio-addons/tree/master/sambanas)

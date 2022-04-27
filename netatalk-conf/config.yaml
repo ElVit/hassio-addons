@@ -34,12 +34,12 @@ map:
   - share:rw
   - ssl:rw
 options:
-  logins:
-    - username: homeassistant
-      password: null
   config_dir: /config/addons-config/netatalk
+  logins:
+    - username: dummyUser
+      password: null
 schema:
+  config_dir: str
   logins:
     - username: str
       password: password
-  config_dir: str

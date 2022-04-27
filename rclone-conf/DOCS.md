@@ -19,11 +19,12 @@ Example add-on configuration:
 config_file: /config/addons-config/rclone/rclone.conf
 jobs:
   - name: Sync job
+    commands: sync --dry-run --verbose
     source: /share/sourceDir
     destination: DummyRemote:/destinationDir
-    command: sync
-    options: --dry-run --verbose
 ```
+
+This job will synchronize all files from '/share/sourceDir' to 'DummyRemote:/destinationDir' and print all copied files in the addon log. The '--dryrun' option defines that actually no files will be copied, so you will see in the log which file would be transfered.
 
 ## Options:
 
@@ -47,36 +48,41 @@ pass = *** ENCRYPTED PASS ***
 
 The name of the Rclone job  
 
+### Option: `commands`
+
+Here you may define commands and options of rclone.  
+
+Usually you would first define a command like "sync" or "copy".  
+Please see the [rclone-manual](https://rclone.org/commands/) for all supported commands.  
+
+Then you may define some options to control the behaviour of the command.  
+Some usefull options are:  
+- `--verbose`: rclone will tell you about each file that is transferred and a small number of significant events  
+- `--dry-run`: Do a trial run with no permanent changes. Use this to see what rclone would do without actually doing it.
+  Useful when setting up the sync command which deletes files in the destination.  
+
+Please see the [rclone-manual](https://rclone.org/docs/#options) for all supported options.  
+
 ### Option: `source`
 
 The source directory where the files will be copied from.  
 This may be a local directory or a remote directory.  
-- Remotes directories shall start with a remote location (from rclone.conf) followed by a ":" and the directory path.  
-- Local directories shall start with /addons, /backup, /config, /media, /share or /ssl.  
+
+*Remotes drectories* shall start with a remote location (from rclone.conf) followed by a ":" and the directory path.  
+*Local directories* shall start with `/addons, /backup, /config, /media, /share or /ssl`.  
 
 ### Option: `destination`
 
 The destination directory where the files will be copied to.  
 This may be a local directory or a remote directory.  
-- Remotes directories shall start with a remote location (from rclone.conf) followed by a ":" and the directory path.  
-- Local directories shall start with /addons, /backup, /config, /media, /share or /ssl.  
 
-### Option: `commands`
-
-Please see the [rclone-manual](https://rclone.org/commands/) for all supported commands.  
-Usually you would use "sync" or "copy".  
-
-### Option: `options`
-
-Please see the [rclone-manual](https://rclone.org/docs/#options) for all supported options.  
-Recommanded options are:  
-- --verbose: rclone will tell you about each file that is transferred and a small number of significant events.  
-- --dry-run: Do a trial run with no permanent changes. Use this to see what rclone would do without actually doing it. Useful when setting up the sync command which deletes files in the destination.  
+*Remotes drectories* shall start with a remote location (from rclone.conf) followed by a ":" and the directory path.  
+*Local directories* shall start with `/addons, /backup, /config, /media, /share or /ssl`.  
 
 ## Automation
 
 You may create an automation in home assistant if you want to run the lftp scripts scheduled.  
-For example:
+For example:  
 
 ```yaml
 - id: home_assistant_run_backup
@@ -103,10 +109,13 @@ In a nutshell, the version will be incremented based on the following:
 
 ## Support
 
-Got questions?
+Got questions?  
 
 You can simply [open an issue here](https://github.com/elvit/hassio-addons/issues) on GitHub.  
 
 ## Authors & contributors
 
 The original setup of this repository is made by [ElVit](https://github.com/elvit).  
+
+The following repositories helped me by developing this addon:
+- [Rclone addon from alex3305](https://github.com/alex3305//home-assistant-addons/tree/master/rclone)
