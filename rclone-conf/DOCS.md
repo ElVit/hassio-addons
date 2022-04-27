@@ -24,7 +24,7 @@ jobs:
     destination: DummyRemote:/destinationDir
 ```
 
-This job will synchronize all files from '/share/sourceDir' to 'DummyRemote:/destinationDir' and print all copied files in the addon log. The '--dryrun' option defines that actually no files will be copied, so you will see in the log which file would be transfered.
+This job will synchronize all files from `/share/sourceDir` to `DummyRemote:/destinationDir` and print all copied files in the addon log. The `--dryrun` option defines that actually no files will be copied, so you will see in the log which file would be transfered.
 
 ## Options:
 
@@ -46,13 +46,14 @@ pass = *** ENCRYPTED PASS ***
 
 ### Option: `name`
 
-The name of the Rclone job  
+The name of the Rclone job.  
+The name is not relevant for the job executing.  
 
 ### Option: `commands`
 
-Here you may define commands and options of rclone.  
+Here you may define commands and options of Rclone.  
 
-Usually you would first define a command like "sync" or "copy".  
+Usually you would first define a command like `sync` or `copy`.  
 Please see the [rclone-manual](https://rclone.org/commands/) for all supported commands.  
 
 Then you may define some options to control the behaviour of the command.  
@@ -68,7 +69,7 @@ Please see the [rclone-manual](https://rclone.org/docs/#options) for all support
 The source directory where the files will be copied from.  
 This may be a local directory or a remote directory.  
 
-*Remotes drectories* shall start with a remote location (from rclone.conf) followed by a ":" and the directory path.  
+*Remotes drectories* shall start with a remote location (from rclone.conf) followed by a ":" and the directory path e.g. `DummyRemote:/destinationDir`.  
 *Local directories* shall start with `/addons, /backup, /config, /media, /share or /ssl`.  
 
 ### Option: `destination`
@@ -76,7 +77,7 @@ This may be a local directory or a remote directory.
 The destination directory where the files will be copied to.  
 This may be a local directory or a remote directory.  
 
-*Remotes drectories* shall start with a remote location (from rclone.conf) followed by a ":" and the directory path.  
+*Remotes drectories* shall start with a remote location (from rclone.conf) followed by a ":" and the directory path e.g. `DummyRemote:/destinationDir`.  
 *Local directories* shall start with `/addons, /backup, /config, /media, /share or /ssl`.  
 
 ## Automation
