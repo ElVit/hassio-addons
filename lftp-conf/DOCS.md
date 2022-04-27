@@ -47,7 +47,12 @@ The password of the remote site. used for authentication.
 ## Writing a script
 
 For more information to the lftp commands and parameters please see the official [General Commands Manual](https://lftp.yar.ru/lftp-man.html).  
+
 There is also a site with some usefull [lftp script examples](https://mrod.space/2019/10/04/lftp-examples.html#scripts) and command explanions.  
+
+As described in [this conversation](https://superuser.com/questions/75681/inverse-multiplexing-to-speed-up-file-transfer) it depends on your files which options are better to use:
+- few and large files: `--parallel=2 --use-pget-n=10`
+- many and small files: `--parallel=100`
 
 ## Automation
 You may create an automation in home assistant if you want to run the lftp scripts scheduled.  
