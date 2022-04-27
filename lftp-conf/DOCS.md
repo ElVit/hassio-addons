@@ -50,7 +50,7 @@ For more information to the lftp commands and parameters please see the official
 
 There is also a site with some usefull [lftp script examples](https://mrod.space/2019/10/04/lftp-examples.html#scripts) and command explanions.  
 
-As described in [this conversation](https://superuser.com/questions/75681/inverse-multiplexing-to-speed-up-file-transfer) it depends on your files which options are better to use:
+As described in [this conversation](https://superuser.com/questions/75681/inverse-multiplexing-to-speed-up-file-transfer) it depends on your files which options are better to use for the `mirror` command:
 - few and large files: `--parallel=2 --use-pget-n=10`
 - many and small files: `--parallel=100`
 
