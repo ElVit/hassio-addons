@@ -1,6 +1,6 @@
 name: LFTP sync
 description: Sync data using lftp
-version: 0.1.0
+version: 0.1.1
 slug: lftp-conf
 url: https://github.com/ElVit/hassio-addons/lftp-conf
 startup: once

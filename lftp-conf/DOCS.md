@@ -20,8 +20,11 @@ script_dir: /config/addons-config/lftp
 credentials:
   - url: 192.168.1.1
     username: dummyUser
-    password: dummyPassowrd
+    password: '!secret password'
 ```
+
+**HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
 
 ## Options:
 
@@ -64,6 +67,10 @@ For example:
   trigger:
     platform: time
     at: '01:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
   action:
     service: hassio.addon_start
     data_template:

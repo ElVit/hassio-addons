@@ -1,6 +1,6 @@
 name: Rclone sync
 description: Rclone is a command line program to sync files and directories to and from various providers.
-version: 0.1.0
+version: 0.1.1
 slug: rclone-conf
 url: https://github.com/ElVit/hassio-addons/rclone-conf
 startup: once

@@ -1,6 +1,6 @@
 name: Netatalk config
 description: Expose Home Assistant folders with AFP
-version: 0.1.0
+version: 0.1.1
 slug: netatalk-conf
 url: https://github.com/ElVit/hassio-addons/netatalk-conf
 startup: services

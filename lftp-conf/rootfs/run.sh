@@ -47,7 +47,7 @@ done
 shopt -s nullglob
 for filePath in ${scriptDir}/*.lftp; do
   bashio::log.info "Starting the lftp script '${filePath}' ..."
-  
+
   # added '|| true' so the next scripts will be executed
   lftp -f "${filePath}" || true
 

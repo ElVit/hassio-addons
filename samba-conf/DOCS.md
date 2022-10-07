@@ -19,8 +19,11 @@ Example add-on configuration:
 config_dir: /config/addons-config/samba
 logins:
   - username: dummyUser
-    password: dummyPassword
+    password: '!secret password'
 ```
+
+**HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
 
 ## Options:
 

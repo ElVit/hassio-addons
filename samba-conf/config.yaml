@@ -1,6 +1,6 @@
 name: Samba config
 description: Expose Home Assistant folders with SMB/CIFS
-version: 0.1.0
+version: 0.1.1
 slug: samba-conf
 url: https://github.com/ElVit/hassio-addons/samba-conf
 startup: services
