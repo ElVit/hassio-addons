@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start traefik service
+# ==============================================================================
+
+ENV_VARS=$(gomplate -d options=/data/options.json -i '{{ range (ds "options").env_vars }}{{ . }} {{ end }}')
+
+if [ -z "$ENV_VARS" ]; then
+  bashio::log.info "No additional environment variables found."
+  bashio::log.info "Starting Traefik ..."
+  exec /usr/local/bin/traefik
+else
+  bashio::log.info "Extracted variables ${ENV_VARS}"
+  bashio::log.info "Starting Traefik ..."
+  env $ENV_VARS /usr/local/bin/traefik
+fi
