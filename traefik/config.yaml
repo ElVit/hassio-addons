@@ -1,5 +1,5 @@
 name: Traefik
-version: 1.0.0
+version: 1.1.0
 slug: traefik
 description: Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 arch:

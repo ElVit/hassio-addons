@@ -15,7 +15,7 @@ mkdir -v -p $config_dir
 bashio::log.info "Check if dynamic config exists ..."
 if [ ! -f "$config_dir/dynamic.yaml" ]; then
   bashio::log.info "Creating dynamic config ..."
-  cp -v /etc/templates/dynamic.yaml $config_dir/dynamic.yaml
+  cp -v /etc/templates/dynamic.yaml.gotmpl $config_dir/dynamic.yaml
 else
   bashio::log.info "dynamic.yaml found."
 fi
@@ -40,7 +40,7 @@ if bashio::config.true 'custom_static_config'; then
   else
     bashio::log.info "traefik.yaml found."
   fi
-  
+
   bashio::log.info "Copying traefik.yaml to /etc/traefik/traefik.yaml ..."
   mkdir -v -p /etc/traefik/
   cp -v $config_dir/traefik.yaml /etc/traefik/traefik.yaml
