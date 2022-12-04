@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start nmbd service
+# ==============================================================================
+
+bashio::log.info "Starting nmbd service ..."
+exec nmbd \
+  --foreground \
+  --debug-stdout \
+  --no-process-group
