@@ -17,16 +17,14 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 
 ENV LANG C.UTF-8
 
+USER root
+
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-USER root
-
 ##################
-# 3 Copy data #
+# 3 Install apps #
 ##################
-
-ARG LFTP_VERSION
 
 # Install requirements for add-on
 RUN apk add --no-cache \
@@ -34,15 +32,31 @@ RUN apk add --no-cache \
       ca-certificates \
       openssh
 
-# Copy data
-COPY rootfs /
-RUN chmod a+x /run.sh
+##################
+# 4 Copy data #
+##################
 
-# Run the script
-CMD [ "/run.sh" ]
+# Copy local files
+COPY rootfs/ /
+
+# Corrects permissions for s6 v3
+RUN if [ -d /etc/cont-init.d ]; then \
+      chmod -R 755 /etc/cont-init.d; fi && \
+    if [ -d /etc/services.d ]; then \
+      chmod -R 755 /etc/services.d; fi && \
+    if [ -d /etc/templates ]; then \
+      chmod -R 755 /etc/templates; fi && \
+    if [ -f /entrypoint.sh ]; then \
+      chmod 755 /entrypoint.sh; fi
+
+################
+# 5 Entrypoint #
+################
+
+CMD [ "/entrypoint.sh" ]
 
 ############
-# 5 Labels #
+# 6 Labels #
 ############
 
 ARG BUILD_ARCH

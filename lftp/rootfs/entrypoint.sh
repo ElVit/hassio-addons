@@ -25,7 +25,7 @@ if [ "$filesCount" -eq 0 ]; then
   bashio::log.info "Creating default lftp script in the script directory ..."
   tempio \
     -conf /data/options.json \
-    -template /usr/share/templates/script.lftp.gtpl \
+    -template /etc/templates/script.lftp.gtpl \
     -out $scriptDir/script.lftp
   bashio::log.warning "Please edit the newly created file '${scriptDir}/script.lftp' and start this addon again."
   bashio::exit.nok
