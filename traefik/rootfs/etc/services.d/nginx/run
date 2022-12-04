@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start nginx service
+# ==============================================================================
+
+bashio::net.wait_for 443
+bashio::log.info "Starting nginx for dashboard ..."
+exec nginx -g 'daemon off; pid /tmp/nginx.pid;'
