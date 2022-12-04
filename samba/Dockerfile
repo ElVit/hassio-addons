@@ -20,7 +20,21 @@ ENV LANG C.UTF-8
 USER root
 
 ##################
-# 3 Copy data #
+# 3 Install apps #
+##################
+
+RUN apk add --no-cache \
+        samba-common-tools \
+        samba-server \
+    && mkdir -p /var/lib/samba \
+    && touch \
+        /etc/samba/lmhosts \
+        /var/lib/samba/account_policy.tdb \
+        /var/lib/samba/registry.tdb \
+        /var/lib/samba/winbindd_idmap.tdb
+
+##################
+# 4 Copy data #
 ##################
 
 # Copy local files
@@ -35,20 +49,6 @@ RUN if [ -d /etc/cont-init.d ]; then \
       chmod -R 755 /etc/templates; fi && \
     if [ -f /entrypoint.sh ]; then \
       chmod 755 /entrypoint.sh; fi
-
-##################
-# 3 Install apps #
-##################
-
-RUN apk add --no-cache \
-        samba-common-tools \
-        samba-server \
-    && mkdir -p /var/lib/samba \
-    && touch \
-        /etc/samba/lmhosts \
-        /var/lib/samba/account_policy.tdb \
-        /var/lib/samba/registry.tdb \
-        /var/lib/samba/winbindd_idmap.tdb
 
 ############
 # 5 Labels #

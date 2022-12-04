@@ -12,7 +12,8 @@ export HOSTNAME
 bashio::log.info "Using Smaba version:"
 smbstatus --version
 
-if ! bashio::config.has_value 'logins[0].username' || ! bashio::config.has_value 'logins[0].password'; then
+if ! bashio::config.has_value 'logins[0].username' || \
+    ! bashio::config.has_value 'logins[0].password'; then
   bashio::exit.nok "No username or password is defined!"
 fi
 
@@ -24,10 +25,10 @@ fi
 bashio::log.info "Using hostname '${HOSTNAME}'."
 
 for interface in $(bashio::network.interfaces); do
-    interfaces+=("${interface}")
+  interfaces+=("${interface}")
 done
 if [ ${#interfaces[@]} -eq 0 ]; then
-    bashio::exit.nok 'No supported interfaces found to bind on.'
+  bashio::exit.nok 'No supported interfaces found to bind on.'
 fi
 bashio::log.info "Supported interfaces: $(printf '%s ' "${interfaces[@]}")"
 
@@ -41,7 +42,8 @@ if bashio::config.true 'custom_config'; then
 
   if [ ! -f "$config_dir/smb.conf" ]; then
     bashio::log.info "Creating smb.conf ..."
-    jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | tempio -template /etc/templates/smb.conf.gtpl -out $config_dir/smb.conf
+    jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | \
+      tempio -template /etc/templates/smb.conf.gtpl -out $config_dir/smb.conf
     bashio::log.info "smb.conf created."
   else
     bashio::log.info "smb.conf found."
@@ -51,7 +53,8 @@ if bashio::config.true 'custom_config'; then
   cp -v $config_dir/smb.conf /etc/samba/smb.conf
 else
   bashio::log.info "Creating smb.conf ..."
-  jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | tempio -template /etc/templates/smb.conf.gtpl -out /etc/samba/smb.conf
+  jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | \
+    tempio -template /etc/templates/smb.conf.gtpl -out /etc/samba/smb.conf
   bashio::log.info "smb.conf created."
 fi
 
