@@ -29,6 +29,10 @@ https://github.com/elvit/hassio-addons
 
 - A simple samba (smb) server with modifiable configuration file.
 
+### &#10003; [Traefik](traefik/)
+
+- A  modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
+
 <!-- ### &#10003; [Netatalk server](netatalk/) -->
 
 <!-- - A simple netatalk (afp) server with modifiable configuration file. -->
