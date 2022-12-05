@@ -21,9 +21,9 @@ https://github.com/elvit/hassio-addons
 
 - A simple sync tool that uses the lftp command-line program. Allows to up- or download almost any file from/to a remote share.
 
-<!-- ### &#10003; [Rclone sync](rclone/) -->
+### &#10003; [Rclone sync](rclone/)
 
-<!-- - A simple sync tool that uses the rclone command-line program. Allows to up- or download almost any file from/to a remote share. -->
+- A simple sync tool that uses the rclone command-line program. Allows to up- or download almost any file from/to a remote share.
 
 ### &#10003; [Samba server](samba/)
 
