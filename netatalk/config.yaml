@@ -1,0 +1,45 @@
+name: Netatalk config
+description: Expose Home Assistant folders with AFP
+version: 0.1.1
+slug: netatalk-conf
+url: https://github.com/ElVit/hassio-addons/netatalk-conf
+startup: services
+init: false
+boot: auto
+hassio_role: admin
+full_access: true
+hassio_api: true
+host_network: true
+host_dbus: true
+host_ipc: true
+apparmor: true
+udev: true
+journald: true
+stage: experimental
+ports:
+  548/tcp: 548
+ports_description:
+  548/tcp: AFP
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+map:
+  - addons:rw
+  - backup:rw
+  - config:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
+options:
+  config_dir: /config/addons-config/netatalk
+  logins:
+    - username: dummyUser
+      password: null
+schema:
+  config_dir: str
+  logins:
+    - username: str
+      password: password
