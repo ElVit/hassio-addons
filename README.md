@@ -33,9 +33,9 @@ https://github.com/elvit/hassio-addons
 
 - A  modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 
-<!-- ### &#10003; [Netatalk server](netatalk/) -->
+### &#10003; [Netatalk server](netatalk/)
 
-<!-- - A simple netatalk (afp) server with modifiable configuration file. -->
+- A simple netatalk (afp) server with modifiable configuration file.
 
 [//]: # "ADDONLIST_END"
 
