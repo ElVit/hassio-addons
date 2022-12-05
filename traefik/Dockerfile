@@ -20,23 +20,6 @@ ENV LANG C.UTF-8
 USER root
 
 ##################
-# 3 Copy data #
-##################
-
-# Copy local files
-COPY rootfs/ /
-
-# Corrects permissions for s6 v3
-RUN if [ -d /etc/cont-init.d ]; then \
-      chmod -R 755 /etc/cont-init.d; fi && \
-    if [ -d /etc/services.d ]; then \
-      chmod -R 755 /etc/services.d; fi && \
-    if [ -d /etc/templates ]; then \
-      chmod -R 755 /etc/templates; fi && \
-    if [ -f /entrypoint.sh ]; then \
-      chmod 755 /entrypoint.sh; fi
-
-##################
 # 3 Install apps #
 ##################
 
@@ -57,6 +40,23 @@ RUN wget --quiet -O /tmp/traefik.tar.gz "https://github.com/traefik/traefik/rele
 RUN tar xzvf /tmp/traefik.tar.gz -C /usr/local/bin traefik
 RUN chmod +x /usr/local/bin/traefik
 RUN rm -f /tmp/*
+
+##################
+# 4 Copy data #
+##################
+
+# Copy local files
+COPY rootfs/ /
+
+# Corrects permissions for s6 v3
+RUN if [ -d /etc/cont-init.d ]; then \
+      chmod -R 755 /etc/cont-init.d; fi && \
+    if [ -d /etc/services.d ]; then \
+      chmod -R 755 /etc/services.d; fi && \
+    if [ -d /etc/templates ]; then \
+      chmod -R 755 /etc/templates; fi && \
+    if [ -f /entrypoint.sh ]; then \
+      chmod 755 /entrypoint.sh; fi
 
 ############
 # 5 Labels #
