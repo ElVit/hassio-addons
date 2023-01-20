@@ -73,3 +73,23 @@
   force group = root
   veto files = /._*/.DS_Store/Thumbs.db/icon?/.Trashes/
   delete veto files = yes
+
+#-------------------------------------------------------------------------
+# You can add Mac OS Time Machine support by uncommenting the lines below.
+# Please keep in mind to change the path or create the directory
+# "/backup/timemachine"
+#-------------------------------------------------------------------------
+# [timemachine]
+#   comment = Time Machine
+#   browseable = yes
+#   writeable = yes
+#   path = /backup/timemachine
+#   valid users = {{range .logins}}{{.username}},{{end}}
+#   force user = root
+#   force group = root
+#   create mask = 0600
+#   directory mask = 0700
+#   spotlight = yes
+#   vfs objects = catia fruit streams_xattr
+#   fruit:aapl = yes
+#   fruit:time machine = yes

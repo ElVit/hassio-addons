@@ -27,6 +27,33 @@ logins:
 **HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
 
+## Modifying the smb.conf
+
+The default smb.conf is created if you enable the option `custom_config` and define a path in the option `config_dir`.  
+Here you can define directories that shall be exposed by the samba server.  
+A full documentation how to write a smb.conf can be found [here](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html).  
+
+You can also add Mac OS Time Machine support to your smb.conf. Here an example:
+
+```conf
+[timemachine]
+  comment = Time Machine
+  browseable = yes
+  writeable = yes
+  path = /backup/timemachine
+  valid users = dummyUser
+  force user = root
+  force group = root
+  create mask = 0600
+  directory mask = 0700
+  spotlight = yes
+  vfs objects = catia fruit streams_xattr
+  fruit:aapl = yes
+  fruit:time machine = yes
+```
+
+Please keep in mind to change the path or create the directory "/backup/timemachine".  
+
 ## Options:
 
 ### Option: `custom_config` (mandatory)
