@@ -12,7 +12,7 @@ startup: system
 init: false
 stage: stable
 boot: auto
-url: https://github.com/ElVit/hassio-addons/traefik
+url: https://github.com/ElVit/hassio-addons/tree/main/traefik
 ports:
   80/tcp: 80
   443/tcp: 443
