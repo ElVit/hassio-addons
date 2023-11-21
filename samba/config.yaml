@@ -1,6 +1,6 @@
 name: Samba server
 description: Expose Home Assistant folders with SMB/CIFS
-version: 1.1.0
+version: 1.2.0
 slug: samba
 url: https://github.com/ElVit/hassio-addons/tree/main/samba
 startup: services
@@ -17,9 +17,11 @@ arch:
   - armv7
   - i386
 map:
-  - addons:rw
+  - addon_config:rw
+  - all_addon_configs:rw
+  - homeassistant_config:rw
+  - addons:rw  
   - backup:rw
-  - config:rw
   - media:rw
   - share:rw
   - ssl:rw
@@ -30,7 +32,6 @@ options:
       password: null
 schema:
   custom_config: bool
-  config_dir: str?
   logins:
     - username: str
       password: password

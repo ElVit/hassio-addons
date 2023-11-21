@@ -5,8 +5,9 @@
 
 declare username
 declare password
-declare config_dir
-declare -a interface
+declare -a interfaces=()
+readonly config_dir="/config/addons_config"
+readonly config_file="$config_dir/smb.conf"
 export HOSTNAME
 
 bashio::log.info "Using Smaba version:"
@@ -33,26 +34,27 @@ fi
 bashio::log.info "Supported interfaces: $(printf '%s ' "${interfaces[@]}")"
 
 if bashio::config.true 'custom_config'; then
-  if ! bashio::config.has_value 'config_dir'; then
-    bashio::exit.nok 'No config directory defined.'
+  echo "Check directory $config_dir exists ..."
+  if [ ! -d "$config_dir" ]; then
+    echo "Creating directory $config_dir"
+    mkdir -v -p $config_dir
+    chmod 777 $config_dir
   fi
-  bashio::log.info "Ensuring config directory exists ..."
-  config_dir=$(bashio::config 'config_dir')
-  mkdir -v -p $config_dir
 
-  if [ ! -f "$config_dir/smb.conf" ]; then
-    bashio::log.info "Creating smb.conf ..."
+  echo "Check file $config_file exists ..."
+  if [ ! -f "$config_file" ]; then
+    bashio::log.info "Creating new smb.conf ..."
     jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | \
-      tempio -template /etc/templates/smb.conf.gtpl -out $config_dir/smb.conf
+      tempio -template /etc/templates/smb.conf.gtpl -out $config_file
     bashio::log.info "smb.conf created."
   else
     bashio::log.info "smb.conf found."
   fi
 
   bashio::log.info "Copying smb.conf to /etc/samba/smb.conf ..."
-  cp -v $config_dir/smb.conf /etc/samba/smb.conf
+  cp -v $config_file /etc/samba/smb.conf
 else
-  bashio::log.info "Creating smb.conf ..."
+  bashio::log.info "Creating new smb.conf ..."
   jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | \
     tempio -template /etc/templates/smb.conf.gtpl -out /etc/samba/smb.conf
   bashio::log.info "smb.conf created."
@@ -73,3 +75,5 @@ for login in $(bashio::config 'logins|keys'); do
   echo -e "${password}\n${password}" | \
     smbpasswd -a -s -c "/etc/samba/smb.conf" "${username}"
 done
+
+

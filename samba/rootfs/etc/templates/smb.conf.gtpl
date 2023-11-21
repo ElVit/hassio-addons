@@ -9,15 +9,25 @@
   log level = 2
   bind interfaces only = yes
   interfaces = {{ .interfaces | join " " }}
-  hosts allow = 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 fe80::/10
+  hosts allow = 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 169.254.0.0/16 fe80::/10 fc00::/7
   mangled names = no
   dos charset = CP850
   unix charset = UTF-8
 
-[config]
+[homeassistant_config]
   browseable = yes
   writeable = yes
-  path = /config
+  path = /homeassistant_config
+  valid users = {{range .logins}}{{.username}},{{end}}
+  force user = root
+  force group = root
+  veto files = /._*/.DS_Store/Thumbs.db/icon?/.Trashes/
+  delete veto files = yes
+
+[addon_configs]
+  browseable = yes
+  writeable = yes
+  path = /addon_configs
   valid users = {{range .logins}}{{.username}},{{end}}
   force user = root
   force group = root

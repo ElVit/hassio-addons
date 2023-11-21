@@ -25,13 +25,12 @@ USER root
 
 RUN apk add --no-cache \
         samba-common-tools \
-        samba-server \
-    && mkdir -p /var/lib/samba \
-    && touch \
-        /etc/samba/lmhosts \
-        /var/lib/samba/account_policy.tdb \
-        /var/lib/samba/registry.tdb \
-        /var/lib/samba/winbindd_idmap.tdb
+        samba-server
+RUN mkdir -p /var/lib/samba
+RUN touch /etc/samba/lmhosts \
+          /var/lib/samba/account_policy.tdb \
+          /var/lib/samba/registry.tdb \
+          /var/lib/samba/winbindd_idmap.tdb
 
 ##################
 # 4 Copy data #
@@ -42,13 +41,17 @@ COPY rootfs/ /
 
 # Corrects permissions for s6 v3
 RUN if [ -d /etc/cont-init.d ]; then \
-      chmod -R 755 /etc/cont-init.d; fi && \
+      chmod -R 755 /etc/cont-init.d; \
+    fi && \
     if [ -d /etc/services.d ]; then \
-      chmod -R 755 /etc/services.d; fi && \
+      chmod -R 755 /etc/services.d; \
+    fi && \
     if [ -d /etc/templates ]; then \
-      chmod -R 755 /etc/templates; fi && \
+      chmod -R 755 /etc/templates; \
+    fi && \
     if [ -f /entrypoint.sh ]; then \
-      chmod 755 /entrypoint.sh; fi
+      chmod 755 /entrypoint.sh; \
+    fi
 
 ############
 # 5 Labels #
