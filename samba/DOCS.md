@@ -4,13 +4,13 @@
 
 The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
 
-1. Navigate in your Home Assistant frontend to __Supervisor -> Add-on Store__
-2. Add this new repository by URL (`https://github.com/elvit/hassio-addons`)
-3. Search for the "Samba server" add-on in the Supervisor add-on store and install it.  
-4. Set the add-on options to your preferences  
-5. Click the `Save` button to store your configuration.  
-6. Start the "Samba server" add-on  
-7. Check the logs of the "Samba server" add-on to see if everything went well.  
+1. Click the Home Assistant My button below to open the add-on on your Home Assistant instance.   
+   [![Open your Home Assistant instance and show the dashboard of an add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=bb4914d7_samba&repository_url=https%3A%2F%2Fgithub.com%2Felvit%2Fhassio-addons)  
+2. Click the `Install` button to install the add-on.  
+3. Go to the `Configuration` tab and set the options to your preferences  
+4. Click the `Save` button to store your configuration.  
+5. Go back to the `Info` tab and start this add-on.  
+6. Check the logs in the `Log` tab to see if everything went well.   
 
 ## Configuration
 
@@ -29,8 +29,10 @@ logins:
 
 ## Modifying the smb.conf
 
-The default smb.conf is created if you enable the option `custom_config` and define a path in the option `config_dir`.  
-Here you can define directories that shall be exposed by the samba server.  
+A default `smb.conf` is created on each start and will be saved to the directory `/addons_config/8b00f271_samba/`.  
+If you enable the option `custom_config` the smb.conf will only be created once.  
+Then you can modify it and yor changes will be kept even when you restart the addon.  
+In the smb.conf you can define directories that shall be exposed by the samba server.  
 A full documentation how to write a smb.conf can be found [here](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html).  
 
 You can also add Mac OS Time Machine support to your smb.conf. Here an example:
@@ -58,14 +60,10 @@ Please keep in mind to change the path or create the directory "/backup/timemach
 
 ### Option: `custom_config` (mandatory)
 
-Enable this option to use a custom smb.conf.  
-If there is no smb.conf file in the `config_dir` directory, then a default smb.conf is created.  
-If this option is disabled a default smb.conf is created each time the addon is started.  
-
-### Option: `config_dir` (optional)
-
-The directory where the custom smb.conf file shall be stored.  
-Each time the addon is started the smb.conf file is copied to the original directory where it will be used.  
+Enable this option to use a custom `smb.conf`.  
+If there is no `smb.conf` in the directory `/addons_config/8b00f271_samba/`, a default `smb.conf` is created.  
+If this option is disabled, a default `smb.conf` is created each time the addon is started.  
+If this option is enabled, your current `smb.conf` will be used on next addon start.  
 
 ### Option: `logins.username` (mandatory)
 

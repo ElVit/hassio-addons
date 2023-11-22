@@ -6,11 +6,11 @@
 declare username
 declare password
 declare -a interfaces=()
-readonly config_dir="/config/addons_config"
+readonly config_dir="/config"
 readonly config_file="$config_dir/smb.conf"
 export HOSTNAME
 
-bashio::log.info "Using Smaba version:"
+bashio::log.info "Using Samba version:"
 smbstatus --version
 
 if ! bashio::config.has_value 'logins[0].username' || \
@@ -34,14 +34,14 @@ fi
 bashio::log.info "Supported interfaces: $(printf '%s ' "${interfaces[@]}")"
 
 if bashio::config.true 'custom_config'; then
-  echo "Check directory $config_dir exists ..."
+  bashio::log.info "Check if directory $config_dir exists ..."
   if [ ! -d "$config_dir" ]; then
-    echo "Creating directory $config_dir"
+    bashio::log.info "Creating $config_dir"
     mkdir -v -p $config_dir
     chmod 777 $config_dir
   fi
 
-  echo "Check file $config_file exists ..."
+  bashio::log.info "Check if file $config_file exists ..."
   if [ ! -f "$config_file" ]; then
     bashio::log.info "Creating new smb.conf ..."
     jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json | \
@@ -51,7 +51,7 @@ if bashio::config.true 'custom_config'; then
     bashio::log.info "smb.conf found."
   fi
 
-  bashio::log.info "Copying smb.conf to /etc/samba/smb.conf ..."
+  bashio::log.info "Copying smb.conf to /etc/samba ..."
   cp -v $config_file /etc/samba/smb.conf
 else
   bashio::log.info "Creating new smb.conf ..."
