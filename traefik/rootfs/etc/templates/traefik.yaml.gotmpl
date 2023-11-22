@@ -50,7 +50,7 @@ certificatesResolvers:
 
 providers:
   file:
-    directory: "{{ $options.dir_of_dynamic_config }}"
+    directory: "/config"
 
 {{ if and (has $options "access_logs") $options.access_logs -}}
 accessLog: {}

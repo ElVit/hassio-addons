@@ -1,5 +1,5 @@
 name: Traefik
-version: 1.1.0
+version: 1.2.0
 slug: traefik
 description: Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 arch:
@@ -25,12 +25,10 @@ hassio_role: default
 hassio_api: true
 panel_icon: mdi:earth-arrow-right
 map:
-  - config:rw
-  - share:rw
+  - addon_config:rw
   - ssl:rw
 options:
   custom_static_config: false
-  dir_of_dynamic_config: /config/addons-config/traefik
   log_level: info
   access_logs: false
   forwarded_headers_insecure: false
@@ -40,8 +38,6 @@ options:
   env_vars: []
 schema:
   custom_static_config: bool
-  dir_of_static_config: str?
-  dir_of_dynamic_config: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   access_logs: bool
   forwarded_headers_insecure: bool

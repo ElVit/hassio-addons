@@ -4,13 +4,13 @@
 
 The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
 
-1. Navigate in your Home Assistant frontend to __Supervisor -> Add-on Store__
-2. Add this new repository by URL (`https://github.com/elvit/hassio-addons`)
-3. Search for the "Traefik" add-on in the Supervisor add-on store and install it.  
-4. Set the add-on options to your preferences  
-5. Click the `Save` button to store your configuration.  
-6. Start the "Traefik" add-on  
-7. Check the logs of the "Traefik" add-on to see if everything went well.  
+1. Click the Home Assistant My button below to open the add-on on your Home Assistant instance.   
+   [![Open your Home Assistant instance and show the dashboard of an add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=bb4914d7_traefik&repository_url=https%3A%2F%2Fgithub.com%2Felvit%2Fhassio-addons)  
+2. Click the `Install` button to install the add-on.  
+3. Go to the `Configuration` tab and set the options to your preferences  
+4. Click the `Save` button to store your configuration.  
+5. Go back to the `Info` tab and start this add-on.  
+6. Check the logs in the `Log` tab to see if everything went well.   
 
 ## How to use
 
@@ -62,10 +62,10 @@ http:
 Full add-on example configuration for Let's Encrypt with Cloudflare DNS proxy and dynamic configuration within your Home Assistant configuration directory: 
 
 ```yaml
+custom_static_config: false
 log_level: INFO
 access_logs: false
 forwarded_headers_insecure: true
-config_dir: /config/addons-config/traefik
 letsencrypt:
   enabled: true
   email: example@home-assistant.io
@@ -81,9 +81,18 @@ env_vars:
 
 ## Options:
 
+### Option `custom_static_config` (mandatory)
+
+Enable this option to use a custom static configuration (traefik.yaml).  
+If there is no `traefik.yaml` in the directory `/addons_config/8b00f271_traefik/`, a default `traefik.yaml` is created.  
+If this option is disabled, a default `traefik.yaml` is created each time the addon is started.  
+If this option is enabled, your current `traefik.yaml` will be used on next addon start.  
+
 ### Option `log_level` (mandatory)
 
-The `log_level` option controls the level of log output by the addon and can
+The `log_level` option controls the level of log output by the addon and Enable this option to use a custom smb.conf.  
+If there is no smb.conf file in the `config_dir` directory, then a default smb.conf is created.  
+If this option is disabled a default smb.conf is created each time the addon is started.  can
 be changed to be more or less verbose, which might be useful when you are
 dealing with an unknown issue. Possible values are: 
 
@@ -108,10 +117,6 @@ Whether to enable access logging to standard out. These logs will be shown in th
 Enables insecure forwarding headers. When this option is enabled, the forwarded headers (`X-Forwarded-*`) will not be replaced by Traefik headers. Only enable this option when you trust your forwarding proxy. 
 
 > ___Note__ for Cloudflare `X-Forwarded-*` proxied headers to work, this must be enabled._ 
-
-### Option `config_dir` (mandatory)
-
-Path to the directory with the static configuration and dynamic endpoint configuration. See the example above. 
 
 ### Option `letsencrypt.enabled` (mandatory)
 
