@@ -1,0 +1,30 @@
+name: Rsync Daemon
+version: 0.0.1
+slug: rsyncd
+description: Sync folders with rsync daemon.
+url: https://github.com/ElVit/hassio-addons/tree/main/rsync
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+host_network: true
+startup: services
+stdin: true
+stage: experimental
+map:
+  - addon_config:rw
+  - all_addon_configs:rw
+  - homeassistant_config:rw
+  - addons:rw
+  - backup:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
+schema:
+  rsync_commands:
+    - str?
+options:
+  rsync_commands: []

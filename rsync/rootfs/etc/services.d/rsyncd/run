@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start smbd service
+# ==============================================================================
+
+bashio::log.info "Starting rsyncd service ..."
+exec rsync --config=/etc/rsyncd.conf --daemon --no-detach
