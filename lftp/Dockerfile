@@ -19,18 +19,18 @@ ENV LANG C.UTF-8
 
 USER root
 
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 ##################
 # 3 Install apps #
 ##################
 
-# Install requirements for add-on
+ARG BUILD_ARCH
+ARG LFTP_VERSION
+ARG OPENSSH_VERSION
+
 RUN apk add --no-cache \
-      lftp \
-      ca-certificates \
-      openssh
+            lftp \
+            openssh \
+            ca-certificates
 
 ##################
 # 4 Copy data #
@@ -41,19 +41,23 @@ COPY rootfs/ /
 
 # Corrects permissions for s6 v3
 RUN if [ -d /etc/cont-init.d ]; then \
-      chmod -R 755 /etc/cont-init.d; fi && \
+      chmod -R 755 /etc/cont-init.d; \
+    fi && \
     if [ -d /etc/services.d ]; then \
-      chmod -R 755 /etc/services.d; fi && \
+      chmod -R 755 /etc/services.d; \
+    fi && \
     if [ -d /etc/templates ]; then \
-      chmod -R 755 /etc/templates; fi && \
+      chmod -R 755 /etc/templates; \
+    fi && \
     if [ -f /entrypoint.sh ]; then \
-      chmod 755 /entrypoint.sh; fi
+      chmod 755 /entrypoint.sh; \
+    fi
 
 ################
 # 5 Entrypoint #
 ################
 
-CMD [ "/entrypoint.sh" ]
+# NONE
 
 ############
 # 6 Labels #

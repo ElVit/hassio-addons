@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+
+* 📈 Updated addon_base to 15.0.7  
+
+* 🆕 Added codenotary signing
+
 ## 1.2.1
 
 * 🐛 Fixed `config_dir` path  

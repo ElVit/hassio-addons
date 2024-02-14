@@ -23,24 +23,10 @@ USER root
 # 3 Install apps #
 ##################
 
-ARG BUILD_ARCH
-ARG TRAEFIK_VERSION
-
-RUN if [ "${BUILD_ARCH}" == "aarch64" ]; then \
-      BUILD_ARCH=arm64; \
-    elif [ "${BUILD_ARCH}" == "i386" ]; then \
-      BUILD_ARCH=386; \
-    elif [ "${BUILD_ARCH}" == "armhf" ]; then \
-      BUILD_ARCH=armv7; \
-    fi
-
-RUN apk add --no-cache nginx gomplate
-RUN wget --quiet -O /tmp/traefik.tar.gz \
-    "https://github.com/traefik/traefik/releases/download/v${TRAEFIK_VERSION}/traefik_v${TRAEFIK_VERSION}_linux_${BUILD_ARCH}.tar.gz"
-#   https://github.com/traefik/traefik/releases/download/v2.9.5/traefik_v2.9.5_linux_386.tar.gz
-RUN tar xzvf /tmp/traefik.tar.gz -C /usr/local/bin traefik
-RUN chmod +x /usr/local/bin/traefik
-RUN rm -f /tmp/*
+RUN apk add --no-cache \
+            nginx \
+            gomplate \
+            traefik
 
 ##################
 # 4 Copy data #
@@ -62,6 +48,12 @@ RUN if [ -d /etc/cont-init.d ]; then \
     if [ -f /entrypoint.sh ]; then \
       chmod 755 /entrypoint.sh; \
     fi
+
+################
+# 5 Entrypoint #
+################
+
+# NONE
 
 ############
 # 5 Labels #

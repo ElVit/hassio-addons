@@ -23,9 +23,13 @@ USER root
 # 3 Install apps #
 ##################
 
+ARG BUILD_ARCH
+ARG SAMBA_VERSION
+
 RUN apk add --no-cache \
-        samba-common-tools \
-        samba-server
+            samba-common-tools \
+            samba-server
+
 RUN mkdir -p /var/lib/samba
 RUN touch /etc/samba/lmhosts \
           /var/lib/samba/account_policy.tdb \
@@ -52,6 +56,12 @@ RUN if [ -d /etc/cont-init.d ]; then \
     if [ -f /entrypoint.sh ]; then \
       chmod 755 /entrypoint.sh; \
     fi
+
+################
+# 5 Entrypoint #
+################
+
+# NONE
 
 ############
 # 5 Labels #

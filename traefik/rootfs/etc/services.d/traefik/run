@@ -9,9 +9,9 @@ ENV_VARS=$(gomplate -d options=/data/options.json -i '{{ range (ds "options").en
 if [ -z "$ENV_VARS" ]; then
   bashio::log.info "No additional environment variables found."
   bashio::log.info "Starting Traefik ..."
-  exec /usr/local/bin/traefik
+  exec traefik
 else
   bashio::log.info "Extracted variables ${ENV_VARS}"
   bashio::log.info "Starting Traefik ..."
-  env $ENV_VARS /usr/local/bin/traefik
+  env $ENV_VARS traefik
 fi

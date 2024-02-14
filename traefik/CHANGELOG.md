@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0
+
+* 📈 Updated addon_base to 15.0.7  
+
+* 🆕 Use alpine package instead of wget from github to install traefik
+
+* 🆕 Added codenotary signing
+
 ## 1.2.0
 
 * 🆕 Use the new Home Assistant directory `addon_configs` for storing the `dynamic.yaml` (dynamic config) and 'traefik.yaml' (static config)  

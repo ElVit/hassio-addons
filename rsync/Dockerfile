@@ -1,6 +1,14 @@
+#################
+# 1 Build Image #
+#################
+
 ARG BUILD_FROM
 ARG BUILD_VERSION
 FROM ${BUILD_FROM}
+
+##################
+# 2 Modify Image #
+##################
 
 # Set S6 wait time
 ENV S6_CMD_WAIT_FOR_SERVICES=1 \
@@ -11,9 +19,17 @@ ENV LANG C.UTF-8
 
 USER root
 
+##################
+# 3 Install apps #
+##################
+
 RUN apk add --no-cache \
             rsync \
             coreutils
+
+##################
+# 4 Copy data #
+##################
 
 COPY rootfs/ /
 
@@ -31,7 +47,15 @@ RUN if [ -d /etc/cont-init.d ]; then \
       chmod 755 /stdin.sh; \
     fi
 
+################
+# 5 Entrypoint #
+################
+
 CMD [ "/stdin.sh" ]
+
+############
+# 6 Labels #
+############
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
