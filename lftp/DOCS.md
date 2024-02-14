@@ -74,7 +74,7 @@ For example:
   action:
     service: hassio.addon_start
     data_template:
-      addon: 8b00f271_lftp-conf
+      addon: 7c7b7dd6_lftp-conf
 ```
 
 This will run all Rclone jobs configured in this addon at 01:00 in the morning.  

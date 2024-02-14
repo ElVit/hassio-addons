@@ -84,7 +84,7 @@ env_vars:
 ### Option `custom_static_config` (mandatory)
 
 Enable this option to use a custom static configuration (traefik.yaml).  
-If there is no `traefik.yaml` in the directory `/addons_config/8b00f271_traefik/`, a default `traefik.yaml` is created.  
+If there is no `traefik.yaml` in the directory `/addons_config/7c7b7dd6_traefik/`, a default `traefik.yaml` is created.  
 If this option is disabled, a default `traefik.yaml` is created each time the addon is started.  
 If this option is enabled, your current `traefik.yaml` will be used on next addon start.  
 
@@ -189,4 +189,4 @@ You can simply [open an issue here](https://github.com/ElVit/hassio-addons/issue
 ## Authors & contributors
 
 The original setup of this repository is made by [alex3305](https://github.com/alex3305):
-- [alex3305/home-assistant-addons/traefik](https://github.com/alex3305/home-assistant-addons/blob/master/traefik/README.md)
+- [alex3305/home-assistant-addons/traefik](https://github.com/alex3305/home-assistant-addons/blob/master/traefik)

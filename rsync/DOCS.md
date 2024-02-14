@@ -49,3 +49,22 @@ A full documentation how to use rsync or how to write a rsyncd.conf can be found
 
 A list of rsync command you want to execute.  
 To execute a rsync command you have to call the `hassio.addon_stdin` service with a suitable index.  
+
+## Changelog & Releases
+
+Releases are based on [Semantic Versioning](https://semver.org/lang/de/spec/v2.0.0.html), and use the format of `MAJOR.MINOR.PATCH`.  
+In a nutshell, the version will be incremented based on the following:  
+
+- `MAJOR`: Incompatible or major changes.  
+- `MINOR`: Backwards-compatible new features and enhancements.  
+- `PATCH`: Backwards-compatible bugfixes and package updates.  
+
+## Support
+
+Got questions?  
+You can simply [open an issue here](https://github.com/ElVit/hassio-addons/issues) on GitHub.  
+
+## Authors & contributors
+
+The original setup of this repository is made by [Poeschl](https://github.com/Poeschl):
+- [Poeschl/Hassio-Addons/rsync](https://github.com/Poeschl/Hassio-Addons/tree/main/rsync)
