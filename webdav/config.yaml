@@ -1,0 +1,40 @@
+name: WebDAV server
+description: Expose Home Assistant folders with WebDAV
+url: https://github.com/ElVit/hassio-addons/tree/main/
+version: 1.0.0
+stage: stable
+slug: webdav
+codenotary: notary@home-assistant.io
+startup: services
+init: false
+boot: auto
+hassio_role: default
+hassio_api: true
+ports:
+  8801/tcp: 8801
+ports_description:
+  8801/tcp: WebDAV
+arch:
+  - aarch64
+  - amd64
+  - i386
+map:
+  - addon_config:rw
+  - all_addon_configs:rw
+  - homeassistant_config:rw
+  - addons:rw
+  - backup:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
+options:
+  tls: false
+  users:
+    - username: dummyUser
+      password: null
+schema:
+  tls: bool
+  users:
+    - username: str
+      password: password
+      scope: str?

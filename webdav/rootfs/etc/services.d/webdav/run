@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start webdav service
+# ==============================================================================
+
+bashio::log.info "Starting webdav service ..."
+
+exec /usr/bin/webdav --config /config/webdav.yaml

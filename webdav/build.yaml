@@ -1,0 +1,11 @@
+---
+# https://github.com/hassio-addons/addon-base
+build_from:
+  aarch64: ghcr.io/hassio-addons/base:15.0.7
+  amd64: ghcr.io/hassio-addons/base:15.0.7
+  i386: ghcr.io/hassio-addons/base:15.0.7
+codenotary:
+  signer: notary@home-assistant.io
+  base_image: notary@home-assistant.io
+args:
+  PKGVER: 4.2.0
