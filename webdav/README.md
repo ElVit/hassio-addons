@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Samba server
+# Home Assistant Add-on: WebDAV server
 
 ![Supports aarch64 Architecture](https://img.shields.io/badge/aarch64-yes-green.svg)
 ![Supports amd64 Architecture](https://img.shields.io/badge/amd64-yes-green.svg)
