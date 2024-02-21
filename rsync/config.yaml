@@ -1,14 +1,17 @@
 name: Rsync daemon
 description: Sync folders with rsync daemon
-version: 1.0.0-beta.1
-slug: rsyncd
 url: https://github.com/ElVit/hassio-addons/tree/main/rsync
-init: false
-host_network: true
-startup: services
-stdin: true
+version: 1.0.0-beta.1
 stage: experimental
+slug: rsync
 codenotary: notary@home-assistant.io
+startup: services
+init: false
+boot: auto
+hassio_role: default
+hassio_api: true
+host_network: true
+stdin: true
 arch:
   - aarch64
   - amd64

@@ -1,24 +1,25 @@
 name: Traefik
-version: 1.3.0
-slug: traefik
 description: Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
+url: https://github.com/ElVit/hassio-addons/tree/main/traefik
+version: 1.3.0
+stage: stable
+slug: traefik
+codenotary: notary@home-assistant.io
 startup: system
 init: false
-stage: stable
 boot: auto
-url: https://github.com/ElVit/hassio-addons/tree/main/traefik
+hassio_role: default
+hassio_api: true
+auth_api: true
+ingress: true
+ingress_entry: dashboard/
+panel_icon: mdi:earth-arrow-right
 ports:
   80/tcp: 80
   443/tcp: 443
 ports_description:
   80/tcp: HTTP
   443/tcp: HTTPS
-ingress: true
-ingress_entry: dashboard/
-hassio_role: default
-hassio_api: true
-panel_icon: mdi:earth-arrow-right
-codenotary: notary@home-assistant.io
 arch:
   - aarch64
   - amd64
