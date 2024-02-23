@@ -17,13 +17,18 @@ The installation of this add-on is pretty straightforward and not different in c
 Example add-on configuration:  
 
 ```yaml
-tls: false
-username: dummyUser
-password: '!secret password'
+config_file: /config/config.yaml
+env_vars: []
+users:
+  - username: DummyUser
+    password: null
 ```
 
 **HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
+
+More config options can be found on the github repo of webdav:  
+https://github.com/hacdias/webdav
 
 ## Modifying the dav.conf
 
