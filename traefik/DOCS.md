@@ -14,13 +14,15 @@ The installation of this add-on is pretty straightforward and not different in c
 
 ## How to use
 
-In the configuration section you will need to set the required configuration path. This can be a directory within your Home Assistant config or Hass.io share directories, since both are read-only mounted on this add-on. 
+In the configuration section you will need to set the required configuration path.  
+This can be a directory within your Home Assistant config or Hass.io share directories, since both are read-only mounted on this add-on.  
 
-Any Traefik endpoint configuration you put in there will be automatically picked up by this add-on. Updates will also be automatically processed by Traefik. 
+Any Traefik endpoint configuration you put in there will be automatically picked up by this add-on.  
+Updates will also be automatically processed by Traefik.  
 
-You can also enable Let's Encrypt support within the configuration and set additional environment variables when those are needed. 
+You can also enable Let's Encrypt support within the configuration and set additional environment variables when those are needed.  
 
-This add-on provides two Traefik entrypoints. `web` on port 80 and `web-secure` on port 443. 
+This add-on provides two Traefik entrypoints. `web` on port 80 and `web-secure` on port 443.  
 
 ### Example dynamic Traefik configuration
 
@@ -110,17 +112,21 @@ you are troubleshooting.
 
 ### Option `access_logs` (mandatory)
 
-Whether to enable access logging to standard out. These logs will be shown in the Hass.io Add-On panel. 
+Whether to enable access logging to standard out.  
+These logs will be shown in the Hass.io Add-On panel. 
 
 ### Option `forwarded_headers_insecure` (mandatory)
 
-Enables insecure forwarding headers. When this option is enabled, the forwarded headers (`X-Forwarded-*`) will not be replaced by Traefik headers. Only enable this option when you trust your forwarding proxy. 
+Enables insecure forwarding headers.  
+When this option is enabled, the forwarded headers (`X-Forwarded-*`) will not be replaced by Traefik headers.  
+Only enable this option when you trust your forwarding proxy. 
 
 > ___Note__ for Cloudflare `X-Forwarded-*` proxied headers to work, this must be enabled._ 
 
 ### Option `letsencrypt.enabled` (mandatory)
 
-Whether or not to enable Let's Encrypt. When this is enabled the `le` certResolver will be activated for you to use. You will also have to set the Let's Encrypt e-mail and challange type. Otherwise Traefik will fail to start. 
+Whether or not to enable Let's Encrypt. When this is enabled the `le` certResolver will be activated for you to use.  
+You will also have to set the Let's Encrypt e-mail and challange type. Otherwise Traefik will fail to start. 
 
 ### Option `letsencrypt.email` (optional)
 
@@ -136,37 +142,47 @@ A challange type you want to use for Let's Encrypt. Valid options are:
 * `httpChallenge`
 * `dnsChallenge`
 
-For more information on challange types and which one to choose, please see the [ACME section](https://docs.traefik.io/https/acme/) of the Treafik documentation regarding this subject. 
+For more information on challange types and which one to choose,  
+please see the [ACME section](https://docs.traefik.io/https/acme/) of the Treafik documentation regarding this subject. 
 
 ### Option `letsencrypt.provider` (optional)
 
-When using the `dnsChallange` you will also need to set a provider to use. The list of providers can be found in the [Let's Encrypt provider section](https://docs.traefik.io/https/acme/#providers) of the Traefik documentation. 
+When using the `dnsChallange` you will also need to set a provider to use.  
+The list of providers can be found in the [Let's Encrypt provider section](https://docs.traefik.io/https/acme/#providers) of the Traefik documentation. 
 
 ### Option `letsencrypt.delayBeforeCheck` (optional)
 
-By default, the provider will verify the TXT DNS challenge record before letting ACME verify. If `delayBeforeCheck` is set and greater than zero, this check is delayed for the configured duration in seconds. 
+By default, the provider will verify the TXT DNS challenge record before letting ACME verify.  
+If `delayBeforeCheck` is set and greater than zero, this check is delayed for the configured duration in seconds. 
 
-This setting can be useful if internal networks block external DNS queries. For more information, check the [Traefik documentation](https://docs.traefik.io/https/acme/#dnschallenge) regarding this subject. 
+This setting can be useful if internal networks block external DNS queries. For more information,  
+check the [Traefik documentation](https://docs.traefik.io/https/acme/#dnschallenge) regarding this subject. 
 
 ### Option `letsencrypt.resolvers` (optional)
 
-Manually set the DNS servers to use when performing the verification step. Useful for situations where internal DNS does not resolve to the same addresses as the public internet (e.g. on a LAN using a FQDN as part of hostnames). 
+Manually set the DNS servers to use when performing the verification step.  
+Useful for situations where internal DNS does not resolve to the same addresses as the public internet (e.g. on a LAN using a FQDN as part of hostnames). 
 
 For more information, see the [Traefik documentation](https://docs.traefik.io/https/acme/#resolvers) regarding this subject. 
 
 ### Option `env_vars` (optional)
 
-Optional environment variables that can be added. These additional configuration values can be necessary for example for the Let's Encrypt DNS challange provider. See the example configuration above for an concrete example. 
+Optional environment variables that can be added.  
+These additional configuration values can be necessary for example for the Let's Encrypt DNS challange provider.  
+See the example configuration above for an concrete example. 
 
 ## Ports
 
-This image exposes two ports for HTTP(S) access. These are also configured within Traefik as entrypoints. You can use these within your dynamic configuration.
+This image exposes two ports for HTTP(S) access.  
+These are also configured within Traefik as entrypoints.  
+You can use these within your dynamic configuration.
 
 ### Port `80`, EntryPoint `web`
 
 Port 80 is used for HTTP access. 
 
-When using a supported Let's Encrypt provider (ie. Cloudflare) with DNS Challange you can also map this port to another, random port and let CloudFlare do the HTTP to HTTPS forwarding. 
+When using a supported Let's Encrypt provider (ie. Cloudflare) with DNS Challange you can also map this port to another,  
+random port and let CloudFlare do the HTTP to HTTPS forwarding. 
 
 ### Port `443`, EntryPoint `web-secure`
 

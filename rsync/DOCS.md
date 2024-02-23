@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Samba server
+# Home Assistant Add-on: Rsync daemon
 
 ## Installation
 
