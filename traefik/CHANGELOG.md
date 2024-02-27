@@ -14,7 +14,7 @@
 
 * 💥 BREAKING CHANGE:  
      Options `dir_of_static_config` and `dir_of_dynamic_config` are removed since the config files will now be copied to the `addons_config` directory.  
-     !!! Please copy your custom config files to `/addons_config/bb4914d7_traefik/` if you want keep your changes !!!  
+     !!! Please copy your custom config files to `/addons_config/xxxxxxxx_traefik/` if you want keep your changes !!!  
 
 * 📈 Updated addon_base to 14.3.2  
 

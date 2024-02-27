@@ -17,38 +17,62 @@ The installation of this add-on is pretty straightforward and not different in c
 Example add-on configuration:  
 
 ```yaml
+custom_config: false
+document_root: /share/webdav
 users:
   - username: dummyUser
     password: '!secret password'
 ```
 
 **HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
+At least for your password it is highly recommended to use it.
 
-**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/`.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`xxxxxxxx` is a random hex number probably some kind of hash value.  
+**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
 
-## Modifying the config.yaml
+## Modifying the lighttpd.conf and webdav.conf
 
 A full documentation how to write a config file can be found [here](https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs).  
 A default `lighttpd.conf` and `webdav.conf` is created in the addon config directory (e.g. `/addon_configs/xxxxxxxx_webdav/`) if they are not available there.  
 
 ## Options:
 
-### Option: `users.username` (mandatory)
+### Option: `custom_config` (mandatory)
 
-A username to authenticate against the WebDAV server.  
-It is possible to define multipe username/password options.  
-This username will be stored in an environment variable and can be used in the config file like so:  
-`username: "{env}USERNAME_0"`
+Enable this option to use a custom `lighttpd.conf` and `webdav.conf`.  
+If there is no `lighttpd.conf` or `webdav.conf` in the directory `/addons_config/xxxxxxxx_webdav/`, a default `lighttpd.conf` or `webdav.conf` is created.  
+If this option is disabled, a default `lighttpd.conf` or `webdav.conf` is used to run this addon.  
+If this option is enabled, your current `lighttpd.conf` or `webdav.conf` will be used on next addon start.  
 
-### Option: `users.password` (mandatory)
+### Option: `document_root` (mandatory)
 
-A password to authenticate against the WebDAV server.  
-It is possible to define multipe username/password options.  
-This password will be stored in an environment variable and can be used in the config file like so:  
-`password: "{env}PASSWORD_0"`
+Set here the root direcory for your webdav server.  
+This option may have no effect if you set the option `custom_config` to `true`.  
+
+### Option: `logins.username` (mandatory)
+
+A username to authenticate against the webdav server.  
+It is possible to define multipe username/password options, but at least one username/password is needed to start the webdav server.  
+This username can be used in your custom smb.conf.  
+
+### Option: `logins.password` (mandatory)
+
+A password to authenticate against the webdav server.  
+It is possible to define multipe username/password options, but at least one username/password is needed to start the webdav server.  
 
 ### Port `8080`, EntryPoint `WebDAV`
 
-Port 8801 is used for WebDAV access. 
+Port 8080 is used for WebDAV access. 
+
+## Changelog & Releases
+
+Releases are based on [Semantic Versioning](https://semver.org/lang/de/spec/v2.0.0.html), and use the format of `MAJOR.MINOR.PATCH`.  
+In a nutshell, the version will be incremented based on the following:  
+
+- `MAJOR`: Incompatible or major changes.  
+- `MINOR`: Backwards-compatible new features and enhancements.  
+- `PATCH`: Backwards-compatible bugfixes and package updates.  
+
+## Support
+
+Got questions?  
+You can simply [open an issue here](https://github.com/ElVit/hassio-addons/issues) on GitHub.  

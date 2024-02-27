@@ -26,20 +26,28 @@ The first command will copy all files from the server to the client (pull).
 The second command will copy all files from the client to the server (push).  
 Since home assistant is also capable of mount SMB shares it is also possible to sync data from/to a SMB share (see second command).
 
+**HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
+At least for your password it is highly recommended to use it.
+
+**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
+
+## Executing a rsync command
+
 To execute one of these rsync command you have to call the `hassio.addon_stdin` service in home assistant:
 
 ```yaml
 service: hassio.addon_stdin
 data:
-  addon: 7c7b7dd6_rsyncd
+  addon: xxxxxxxx_rsyncd
   input: 0
 ```
 
-The `input` element defines the index of the rsync command in the addon config list. In this example the first command will be executed.   
+The `input` element defines the index of the rsync command in the addon config list.  
+In this example the first command will be executed.  
 
 ## Modifying the rsyncd.conf
 
-A default `rsynd.conf` is created if there is no `rsync.d` file in the directory `/addons_config/7c7b7dd6_rsyncd/`.  
+A default `rsynd.conf` is created if there is no `rsync.d` file in the directory `/addons_config/xxxxxxxx_rsyncd/`.  
 In the rsyncd.conf you can define directories which shall be exposed by the samba server.  
 A full documentation how to use rsync or how to write a rsyncd.conf can be found [here](https://rsync.samba.org/documentation.html).  
 

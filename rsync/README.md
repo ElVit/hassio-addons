@@ -6,7 +6,7 @@
 ![Supports armv7 Architecture](https://img.shields.io/badge/armv7-yes-green.svg)
 ![Supports i386 Architecture](https://img.shields.io/badge/i386-yes-green.svg)
 
-Sync folders with rsync daemon.
+Sync directories by using the rsync daemon.
 
 
 

@@ -25,11 +25,13 @@ logins:
 ```
 
 **HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
+At least for your password it is highly recommended to use it.
+
+**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
 
 ## Modifying the smb.conf
 
-A default `smb.conf` is created on each start and will be saved to the directory `/addons_config/7c7b7dd6_samba/`.  
+A default `smb.conf` is created on each start and will be saved to the directory `/addons_config/xxxxxxxx_samba/`.  
 If you enable the option `custom_config` the smb.conf will only be created once.  
 Then you can modify it and yor changes will be kept even when you restart the addon.  
 In the smb.conf you can define directories that shall be exposed by the samba server.  
@@ -61,7 +63,7 @@ Please keep in mind to change the path or create the directory "/backup/timemach
 ### Option: `custom_config` (mandatory)
 
 Enable this option to use a custom `smb.conf`.  
-If there is no `smb.conf` in the directory `/addons_config/7c7b7dd6_samba/`, a default `smb.conf` is created.  
+If there is no `smb.conf` in the directory `/addons_config/xxxxxxxx_samba/`, a default `smb.conf` is created.  
 If this option is disabled, a default `smb.conf` is created each time the addon is started.  
 If this option is enabled, your current `smb.conf` will be used on next addon start.  
 

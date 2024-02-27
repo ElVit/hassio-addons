@@ -18,7 +18,7 @@
 
 * 💥 BREAKING CHANGE:
      Option `config_dir` was removed since the smb.conf will now be copied to the `addons_config` directory  
-     !!! Please copy your custom smb.conf to `/addons_config/bb4914d7_samba/` if you want keep your changes !!!  
+     !!! Please copy your custom smb.conf to `/addons_config/xxxxxxxx_samba/` if you want keep your changes !!!  
 
 * 📈 Updated addon_base to 14.3.2  
 
