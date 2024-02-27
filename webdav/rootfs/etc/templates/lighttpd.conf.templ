@@ -1,0 +1,20 @@
+server.modules = (
+  "mod_access",
+  "mod_accesslog",
+  "mod_webdav",
+  "mod_auth",
+  "mod_authn_file"
+)
+
+server.port           = 8080
+# server.username     = "webdav"
+server.groupname      = "webdav"
+server.document-root  = "{{.document_root}}"
+server.pid-file       = "/run/lighttpd.pid"
+server.follow-symlink = "enable"
+
+var.logdir            = "/config/log"
+accesslog.filename    = var.logdir + "/access.log"
+server.errorlog       = var.logdir  + "/error.log"
+
+include "/config/webdav.conf"

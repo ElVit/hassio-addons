@@ -17,9 +17,6 @@ The installation of this add-on is pretty straightforward and not different in c
 Example add-on configuration:  
 
 ```yaml
-config_file: /config/config.yaml
-env_vars: 
-  - EXAMPLE_ENV_VAR=dummyContent
 users:
   - username: dummyUser
     password: '!secret password'
@@ -28,52 +25,15 @@ users:
 **HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At least for your password it is highly recommended to use it.
 
+**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/`.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`xxxxxxxx` is a random hex number probably some kind of hash value.  
+
 ## Modifying the config.yaml
 
-A full documentation how to write a config file can be found [here](https://github.com/hacdias/webdav).  
-A default `config.yaml` is created if the file defined in the option `config_file` is not available.  
-
-Here an example how the content of an config can look like:
-
-```yaml
-# For a more complete configuration see:
-# https://github.com/hacdias/webdav
-
-# Server related settings
-auth: true
-tls: false
-
-# Default user settings (will be merged)
-scope: /share/webdav
-modify: true
-
-# User settings
-users:
-  - username: "{env}USERNAME_0"
-    password: "{env}PASSWORD_0"
-    scope: /share/webdav
-    modify: true
-```
-
-The users defined in the options will be saved as environment variables.  
-The `username` sub-options will be saved in the environment variable `USERNAME_` + index.  
-The `password` sub-options will be saved in the environment variable `PASSWORD_` + index.  
-E.g. for the first user the env_vars `USERNAME_0` and `PASSWORD_0` will be created.  
-These environment variables can nor be used in the config file (see the example above).  
+A full documentation how to write a config file can be found [here](https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs).  
+A default `lighttpd.conf` and `webdav.conf` is created in the addon config directory (e.g. `/addon_configs/xxxxxxxx_webdav/`) if they are not available there.  
 
 ## Options:
-
-### Option: `config_file` (mandatory)
-
-Define here the location of the config file.  
-A config file can be of type json, toml, yaml or yml.  
-Possible values which can be used in this file are described here: https://github.com/hacdias/webdav  
-
-### Option `env_vars` (optional)
-
-Optional environment variables that can be added.  
-To set a config option via an environment variable the environment variables shall be prefixed by `WD_` followed by the option name in caps.  
-So to set `cert` with the value `cert.pem` via an env variable, you should set `WD_CERT=cert.pem`.  
 
 ### Option: `users.username` (mandatory)
 
@@ -89,6 +49,6 @@ It is possible to define multipe username/password options.
 This password will be stored in an environment variable and can be used in the config file like so:  
 `password: "{env}PASSWORD_0"`
 
-### Port `8801`, EntryPoint `WebDAV`
+### Port `8080`, EntryPoint `WebDAV`
 
 Port 8801 is used for WebDAV access. 

@@ -1,0 +1,13 @@
+# Require authentication
+$HTTP["host"] =~ "." {
+
+  server.document-root = "{{.document_root}}"
+  webdav.activate = "enable"
+  webdav.is-readonly = "disable"
+
+  auth.backend = "htpasswd"
+  auth.backend.htpasswd.userfile = "/etc/lighttpd/.htpasswd"
+  auth.require = ( "" => ("method"  => "basic",
+                          "realm"   => "webdav",
+                          "require" => "valid-user" ) )
+}

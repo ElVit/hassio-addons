@@ -1,27 +1,11 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Start webdav service
+# Start lighttpd service
 # ==============================================================================
 
-# Create environment variables for usernames and passwords
-for id in $(bashio::config 'users|keys'); do
-  bashio::config.require.username "users[${id}].username"
-  bashio::config.require.password "users[${id}].password"
-  username=$(bashio::config "users[${id}].username")
-  password=$(bashio::config "users[${id}].password")
-  env_var="USERNAME_${id}=${username}"
-  export $env_var
-  env_var="PASSWORD_${id}=${password}"
-  export $env_var
-done
-
-# create additional environment variables
-for id in $(bashio::config 'env_vars|keys'); do
-  env_var=$(bashio::config "env_vars[${id}]")
-  export $env_var
-  bashio::log.info "ENV_VAR: $env_var"
-done
-
-bashio::log.info "Starting webdav service ..."
-config_file=$(bashio::config "config_file")
-exec /usr/bin/webdav --config $config_file --port 8801 --address 0.0.0.0
+bashio::log.info "Starting lighttpd service ..."
+if bashio::config.true 'custom_config'; then
+  exec lighttpd -D -f /config/lighttpd.conf
+else
+  exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
+fi

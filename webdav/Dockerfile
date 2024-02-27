@@ -24,23 +24,13 @@ USER root
 ##################
 
 ARG BUILD_ARCH
-ARG PKGVER
-
-RUN if [ "${BUILD_ARCH}" == "aarch64" ]; then \
-      BUILD_ARCH=arm64; \
-    elif [ "${BUILD_ARCH}" == "i386" ]; then \
-      BUILD_ARCH=386; \
-    fi
 
 # Install alpine packages
 RUN apk add --no-cache \
-        nginx \
-        gomplate
-
-RUN wget --quiet -O /tmp/webdav.tar.gz https://github.com/hacdias/webdav/releases/download/v${PKGVER}/linux-${BUILD_ARCH}-webdav.tar.gz \
-  && tar xzvf /tmp/webdav.tar.gz -C /usr/bin webdav \
-  && chmod +x /usr/bin/webdav \
-  && rm -f /tmp/*
+        lighttpd \
+        lighttpd-mod_webdav \
+        lighttpd-mod_auth \
+        apache2-utils
 
 ##################
 # 4 Copy data #
@@ -58,6 +48,9 @@ RUN if [ -d /etc/cont-init.d ]; then \
     fi && \
     if [ -d /etc/templates ]; then \
       chmod -R 755 /etc/templates; \
+    fi && \
+    if [ -d /etc/lighttpd ]; then \
+      chmod -R 755 /etc/lighttpd; \
     fi
 
 ################

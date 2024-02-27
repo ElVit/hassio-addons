@@ -4,8 +4,8 @@
 # ==============================================================================
 
 if [[ "${1}" -ne 0 ]] && [[ "${1}" -ne 256 ]]; then
-  bashio::log.warning "webdav crashed, halting add-on"
+  bashio::log.warning "lighttpd crashed, halting add-on"
   exec /run/s6/basedir/bin/halt
 fi
 
-bashio::log.info "webdav stopped, restarting ..."
+bashio::log.info "lighttpd stopped, restarting ..."
