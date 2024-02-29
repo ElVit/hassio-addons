@@ -43,15 +43,15 @@ RUN if [ -d /etc/cont-init.d ]; then \
     if [ -d /etc/templates ]; then \
       chmod -R 755 /etc/templates; \
     fi && \
-    if [ -f /stdin.sh ]; then \
-      chmod 755 /stdin.sh; \
+    if [ -f /etc/rsync ]; then \
+      chmod 755 /etc/rsync; \
     fi
 
 ################
 # 5 Entrypoint #
 ################
 
-CMD [ "/stdin.sh" ]
+CMD [ "/etc/rsync/stdin.sh" ]
 
 ############
 # 6 Labels #

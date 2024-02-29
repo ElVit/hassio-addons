@@ -17,19 +17,23 @@ while read -r input; do
   # Parse JSON value
   input=$(bashio::jq "${input}" '.')
   bashio::log.info "STDIN: ${input}"
-
-  re='^[0-9]+$'
-  if ! [[ $input =~ $re ]]; then
-      bashio::log.error "STDIN is not a positive number."
-      continue
-  fi
-  if [ "$input" -ge "$cmd_count" ]; then
-      bashio::log.error "Command index is greater than the count of rsync commands."
+  
+  if ! [[ $input =~ ^[0-9]+$ ]]; then
+      bashio::log.warning "STDIN is not a positive number."
       continue
   fi
 
-  bashio::log.info "Executing rsync command at index: ${input}"
-  command=$(echo "$commands" | jq -r ".[$input]")
+  if (( input < 1 )) || (( input > cmd_count )); then
+      bashio::log.warning "STDIN is 0 or greater than the count of rsync commands."
+      continue
+  fi
+
+  bashio::log.info "Executing rsync command No. ${input}."
+  index="$((input - 1))"
+  command=$(echo "$commands" | jq -r ".[$index]")
   bashio::log.info "$command"
+  
   eval "rsync $command"
+  
+  bashio::log.info "Rsync command No. ${input} finished."
 done
