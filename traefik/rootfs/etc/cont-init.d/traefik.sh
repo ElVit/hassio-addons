@@ -8,8 +8,8 @@ readonly ssl_dir="/ssl/traefik"
 readonly log_dir="$config_dir/log"
 readonly static_file="$config_dir/traefik.yaml"
 readonly dynamic_file="$config_dir/dynamic.yaml"
-readonly static_template="/etc/templates/traefik.yaml.gotmpl"
-readonly dynamic_template="/etc/templates/dynamic.yaml.gotmpl"
+readonly static_template="/etc/templates/traefik.yaml.templ"
+readonly dynamic_template="/etc/templates/dynamic.yaml.templ"
 
 
 bashio::log.info "Ensuring directory '$ssl_dir' exists ..."
