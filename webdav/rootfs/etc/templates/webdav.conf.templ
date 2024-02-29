@@ -1,7 +1,7 @@
 # Require authentication
 $HTTP["host"] =~ "." {
 
-  server.document-root = "{{.document_root}}"
+  server.document-root = "{{ .document_root }}"
   webdav.activate = "enable"
   webdav.is-readonly = "disable"
 

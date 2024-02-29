@@ -11,6 +11,7 @@ readonly config_dir="/config"
 readonly config_file="$config_dir/smb.conf"
 readonly config_template="/etc/templates/smb.conf.templ"
 
+
 bashio::log.info "Show samba version:"
 smbstatus --version
 
