@@ -4,8 +4,13 @@
 # Start nmbd service
 # ==============================================================================
 
+declare config
+
+config=$(bashio::config.true 'custom_config' && echo "/config/smb.conf" || echo "/etc/samba/smb.conf")
+
 bashio::log.info "Starting nmbd service ..."
-exec nmbd \
-  --foreground \
-  --debug-stdout \
-  --no-process-group
+exec nmbd --foreground \
+          --debug-stdout \
+          --no-process-group \
+          --configfile=$config
+

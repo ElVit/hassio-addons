@@ -52,9 +52,6 @@ RUN if [ -d /etc/cont-init.d ]; then \
     fi && \
     if [ -d /etc/templates ]; then \
       chmod -R 755 /etc/templates; \
-    fi && \
-    if [ -f /entrypoint.sh ]; then \
-      chmod 755 /entrypoint.sh; \
     fi
 
 ################

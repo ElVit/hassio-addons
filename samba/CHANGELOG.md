@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+* 🧰 Code refactoring
+
 ## 1.3.0
 
 * 📈 Updated addon_base to 15.0.7  

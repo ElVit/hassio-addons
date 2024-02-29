@@ -4,8 +4,12 @@
 # Start smbd service
 # ==============================================================================
 
+declare config
+
+config=$(bashio::config.true 'custom_config' && echo "/config/smb.conf" || echo "/etc/samba/smb.conf")
+
 bashio::log.info "Starting smbd service ..."
-exec smbd \
-  --foreground \
-  --debug-stdout \
-  --no-process-group
+exec smbd --foreground \
+          --debug-stdout \
+          --no-process-group \
+          --configfile=$config
