@@ -4,14 +4,20 @@
 # Start traefik service
 # ==============================================================================
 
-ENV_VARS=$(gomplate -d options=/data/options.json -i '{{ range (ds "options").env_vars }}{{ . }} {{ end }}')
+declare config
 
-if [ -z "$ENV_VARS" ]; then
+config=$(bashio::config.true 'custom_config' && echo "/config/traefik.yaml" || echo "/etc/traefik/traefik.yaml")
+
+bashio::log.info "Create additional environment variables ..."
+for id in $(bashio::config 'env_vars|keys'); do
+  env_var=$(bashio::config "env_vars[${id}]")
+  export $env_var
+  bashio::log.info "-> export $env_var"
+done
+
+if bashio::config.is_empty "env_vars"; then
   bashio::log.info "No additional environment variables found."
-  bashio::log.info "Starting Traefik ..."
-  exec traefik
-else
-  bashio::log.info "Extracted variables ${ENV_VARS}"
-  bashio::log.info "Starting Traefik ..."
-  env $ENV_VARS traefik
 fi
+
+bashio::log.info "Starting Traefik ..."
+exec traefik --configFile=$config

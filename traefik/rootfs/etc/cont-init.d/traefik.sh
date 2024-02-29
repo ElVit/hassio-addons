@@ -4,58 +4,50 @@
 # ==============================================================================
 
 readonly config_dir="/config"
-readonly dynamic_file="$config_dir/dynamic.yaml"
-readonly static_file="$config_dir/traefik.yaml"
 readonly ssl_dir="/ssl/traefik"
-readonly traefik_dir="/etc/traefik"
+readonly log_dir="$config_dir/log"
+readonly static_file="$config_dir/traefik.yaml"
+readonly dynamic_file="$config_dir/dynamic.yaml"
+readonly static_template="/etc/templates/traefik.yaml.gotmpl"
+readonly dynamic_template="/etc/templates/dynamic.yaml.gotmpl"
 
-bashio::log.info "Check if directory $ssl_dir exists ..."
-if [ ! -d "$ssl_dir" ]; then
-  bashio::log.info "Creating $ssl_dir"
-  mkdir -v -p $ssl_dir
-  chmod 777 $ssl_dir
+
+bashio::log.info "Ensuring directory '$ssl_dir' exists ..."
+mkdir -v -p $ssl_dir/
+chmod -R 600 $ssl_dir
+
+bashio::log.info "Ensuring directory '$config_dir' exists ..."
+mkdir -v -p $config_dir/
+chmod -R 755 $config_dir
+
+if bashio::config.true 'access_logs'; then
+  bashio::log.info "Ensuring directory '$log_dir' exists ..."
+  mkdir -v -p $log_dir/
+  chmod -R 755 $log_dir
 fi
 
-bashio::log.info "Check if directory $config_dir exists ..."
-if [ ! -d "$config_dir" ]; then
-  bashio::log.info "Creating $config_dir"
-  mkdir -v -p $config_dir
-  chmod 777 $config_dir
+bashio::log.info "Ensuring file '$dynamic_file' exists ..."
+if ! bashio::fs.file_exists "$dynamic_file"; then
+  cp -v $dynamic_template $dynamic_file
 fi
 
-bashio::log.info "Check if file $dynamic_file exists ..."
-if [ ! -f "$dynamic_file" ]; then
-  bashio::log.info "Creating dynamic.yaml ..."
-  cp -v /etc/templates/dynamic.yaml.gotmpl $dynamic_file
-else
-  bashio::log.info "dynamic.yaml found."
-fi
-
-bashio::log.info "Check if directory $traefik_dir exists ..."
-if [ ! -d "$traefik_dir" ]; then
-  bashio::log.info "Creating $traefik_dir"
-  mkdir -v -p $traefik_dir
-  chmod 777 $traefik_dir
-fi
-
-if bashio::config.true 'custom_static_config'; then
-  bashio::log.info "Check if file $static_file exists ..."
-  if [ ! -f "$static_file" ]; then
+if bashio::config.true "custom_config"; then
+  bashio::log.info "Check if file '$static_file' exists ..."
+  if ! bashio::fs.file_exists "$static_file"; then
     bashio::log.info "Creating traefik.yaml ..."
-    gomplate \
-      --file /etc/templates/traefik.yaml.gotmpl \
-      --datasource options=/data/options.json \
-      --out $static_file
+    tempio \
+      -conf /data/options.json \
+      -template $static_template \
+      -out $static_file
+    bashio::log.info "traefik.yaml created."
   else
     bashio::log.info "traefik.yaml found."
   fi
-
-  bashio::log.info "Copying traefik.yaml to $traefik_dir ..."
-  cp -v $static_file /etc/traefik/traefik.yaml
 else
   bashio::log.info "Creating traefik.yaml ..."
-  gomplate \
-    --file /etc/templates/traefik.yaml.gotmpl \
-    --datasource options=/data/options.json \
-    --out /etc/traefik/traefik.yaml
+  tempio \
+    -conf /data/options.json \
+    -template $static_template \
+    -out /etc/traefik/traefik.yaml
+  bashio::log.info "traefik.yaml created."
 fi

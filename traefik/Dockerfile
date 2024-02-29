@@ -25,8 +25,9 @@ USER root
 
 RUN apk add --no-cache \
             nginx \
-            gomplate \
             traefik
+
+RUN mkdir -p /etc/traefik
 
 ##################
 # 4 Copy data #
@@ -45,8 +46,8 @@ RUN if [ -d /etc/cont-init.d ]; then \
     if [ -d /etc/templates ]; then \
       chmod -R 755 /etc/templates; \
     fi && \
-    if [ -f /entrypoint.sh ]; then \
-      chmod 755 /entrypoint.sh; \
+    if [ -d /etc/traefik ]; then \
+      chmod -R 755 /etc/traefik; \
     fi
 
 ################

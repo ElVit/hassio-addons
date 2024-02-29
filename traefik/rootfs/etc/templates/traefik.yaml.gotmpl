@@ -2,8 +2,6 @@
 # !!! Changes will only take effect after the Home Assistant Traefik add-on has been restarted !!!
 # To regenerate the static configuration file please delete this file and restart the Traefik Addon.
 
-{{- $options := (ds "options") }}
-
 global:
   checkNewVersion: false
   sendAnonymousUsage: false
@@ -13,35 +11,35 @@ entryPoints:
     address: ":80"
   web-secure:
     address: ":443"
-{{- if has $options "forwarded_headers_insecure" }}
+{{- if .forwarded_headers_insecure }}
     forwardedHeaders:
-      insecure: {{ $options.forwarded_headers_insecure }}
+      insecure: {{ .forwarded_headers_insecure }}
 {{- end }}
 
 api:
   dashboard: true
   insecure: true
 
-{{ if and (has $options "letsencrypt") ($options.letsencrypt.enabled) -}}
+{{ if .letsencrypt.enabled -}}
 certificatesResolvers:
   le:
     acme:
-      email: "{{ $options.letsencrypt.email }}"
+      email: "{{ .letsencrypt.email }}"
       storage: "/ssl/traefik/acme.json"
-  {{- if or (not (has $options.letsencrypt "challenge_type")) (eq $options.letsencrypt.challenge_type "tlsChallenge") }}
+  {{- if or (not (.letsencrypt.challenge_type)) (eq .letsencrypt.challenge_type "tlsChallenge") }}
       tlsChallenge: {}
-  {{- else if eq $options.letsencrypt.challenge_type "httpChallenge" }}
+  {{- else if eq .letsencrypt.challenge_type "httpChallenge" }}
       httpChallenge:
         entryPoint: web
-  {{- else if eq $options.letsencrypt.challenge_type "dnsChallenge" }}
+  {{- else if eq .letsencrypt.challenge_type "dnsChallenge" }}
       dnsChallenge:
-        provider: {{ $options.letsencrypt.provider }}
-    {{- if has $options.letsencrypt "delayBeforeCheck" }}
-        delayBeforeCheck: {{ $options.letsencrypt.delayBeforeCheck }}
+        provider: {{ .letsencrypt.provider }}
+    {{- if .letsencrypt.delayBeforeCheck }}
+        delayBeforeCheck: {{ .letsencrypt.delayBeforeCheck }}
     {{- end }}
-      {{- if and (has $options.letsencrypt "resolvers") (gt (len $options.letsencrypt.resolvers) 0) }}
+      {{- if and (.letsencrypt.resolvers) (gt (len .letsencrypt.resolvers) 0) }}
         resolvers:
-        {{- range $options.letsencrypt.resolvers }}
+        {{- range .letsencrypt.resolvers }}
           - "{{ . }}"
         {{- end }}
       {{- end }}
@@ -51,10 +49,12 @@ certificatesResolvers:
 providers:
   file:
     directory: "/config"
+    watch: true
+{{- if .access_logs}}
 
-{{ if and (has $options "access_logs") $options.access_logs -}}
-accessLog: {}
+accessLog:
+  filePath: "/config/log/access.log"
 {{- end }}
 
 log:
-  level: {{ strings.ToUpper $options.log_level }}
+  level: {{ upper .log_level }}

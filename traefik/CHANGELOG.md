@@ -1,12 +1,20 @@
 # Changelog
 
+## 1.3.1
+
+* 🧰 Code refactoring  
+     User tempio instead of gomplate.  
+
+* 💥 BREAKING CHANGE:  
+     Renamed option "custom_static_config" to "custom_config"  
+
 ## 1.3.0
 
 * 📈 Updated addon_base to 15.0.7  
 
-* 🆕 Use alpine package instead of wget from github to install traefik
+* 🆕 Use alpine package instead of wget from github to install traefik  
 
-* 🆕 Added codenotary signing
+* 🆕 Added codenotary signing  
 
 ## 1.2.0
 
