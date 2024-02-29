@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+* 🧰 Code refactoring
+
 ## 1.2.0
 
 * 🆕 Switched to lighttpd (based on https://github.com/jgeusebroek/docker-webdav/tree/master)  

@@ -32,6 +32,9 @@ RUN apk add --no-cache \
         lighttpd-mod_auth \
         apache2-utils
 
+RUN mkdir -p /etc/lighttpd
+RUN touch /etc/lighttpd/.htpasswd
+
 ##################
 # 4 Copy data #
 ##################

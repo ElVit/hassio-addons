@@ -3,9 +3,9 @@
 # Start lighttpd service
 # ==============================================================================
 
+declare config
+
+config=$(bashio::config.true 'custom_config' && echo "/config/lighttpd.conf" || echo "/etc/lighttpd/lighttpd.conf")
+
 bashio::log.info "Starting lighttpd service ..."
-if bashio::config.true 'custom_config'; then
-  exec lighttpd -D -f /config/lighttpd.conf
-else
-  exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
-fi
+exec lighttpd -D -f $config
