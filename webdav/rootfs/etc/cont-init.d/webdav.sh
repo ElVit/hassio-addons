@@ -67,7 +67,7 @@ else
   tempio \
     -conf /data/options.json \
     -template $webdav_template  \
-    -out /etc/lighttpd/webdsv.conf
+    -out /etc/lighttpd/webdav.conf
   bashio::log.info "webdav.conf created."
 fi
 
