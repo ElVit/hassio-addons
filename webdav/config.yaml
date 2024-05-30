@@ -1,7 +1,7 @@
 name: WebDAV server
 description: Expose Home Assistant folders with WebDAV
 url: https://github.com/ElVit/hassio-addons/tree/main/webdav
-version: 1.2.1
+version: 1.2.2
 stage: stable
 slug: webdav
 codenotary: notary@home-assistant.io
