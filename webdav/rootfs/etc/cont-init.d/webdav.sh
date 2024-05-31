@@ -3,11 +3,9 @@
 # Prepare the Samba service for running
 # ==============================================================================
 
-readonly config_dir="/config"
-readonly log_dir="$config_dir/log"
-readonly lighttpd_file="$config_dir/lighttpd.conf"
+readonly default_config_dir="/etc/lighttpd"
+readonly custom_config_dir="/config"
 readonly lighttpd_template=/etc/templates/lighttpd.conf.templ
-readonly webdav_file="$config_dir/webdav.conf"
 readonly webdav_template=/etc/templates/webdav.conf.templ
 
 
@@ -19,13 +17,13 @@ if ! bashio::config.has_value 'logins[0].username' || \
   bashio::exit.nok "No username or password is defined!"
 fi
 
-bashio::log.info "Ensure directory $config_dir/ exists ..."
-mkdir -v -p $config_dir
-chmod -R 755 $config_dir
+bashio::log.info "Ensure directory $custom_config_dir/ exists ..."
+mkdir -v -p $custom_config_dir
+chmod -R 755 $custom_config_dir
 
-bashio::log.info "Ensure directory $log_dir/ exists ..."
-mkdir -v -p $log_dir
-chmod -R 755 $log_dir
+bashio::log.info "Ensure directory $custom_config_dir/log/ exists ..."
+mkdir -v -p $custom_config_dir/log
+chmod -R 755 $custom_config_dir/log
 
 root_dir=$(bashio::config "document_root")
 bashio::log.info "Ensure directory $root_dir/ exists ..."
@@ -33,41 +31,46 @@ mkdir -v -p $root_dir
 chmod -R 755 $root_dir
 
 if bashio::config.true 'custom_config'; then
-  bashio::log.info "Check if file '$lighttpd_file' exists ..."
-  if ! bashio::fs.file_exists "$lighttpd_file"; then
+  config_dir=$custom_config_dir
+
+  bashio::log.info "Check if file '$config_dir/lighttpd.conf' exists ..."
+  if ! bashio::fs.file_exists "$config_dir/lighttpd.conf"; then
     bashio::log.info "Creating lighttpd.conf ..."
-    tempio \
-      -conf /data/options.json \
-      -template $lighttpd_template  \
-      -out $lighttpd_file
+    jq ".config_dir = \"$config_dir\"" /data/options.json \
+      | tempio \
+        -template $lighttpd_template  \
+        -out $config_dir/lighttpd.conf
     bashio::log.info "lighttpd.conf created."
   else
     bashio::log.info "lighttpd.conf found."
   fi
 
-  bashio::log.info "Check if file '$webdav_file' exists ..."
-  if ! bashio::fs.file_exists "$webdav_file"; then
+  bashio::log.info "Check if file '$config_dir/webdav.conf' exists ..."
+  if ! bashio::fs.file_exists "$config_dir/webdav.conf"; then
     bashio::log.info "Creating webdav.conf ..."
     tempio \
       -conf /data/options.json \
       -template $webdav_template  \
-      -out $webdav_file
+      -out $config_dir/webdav.conf
     bashio::log.info "webdav.conf created."
   else
     bashio::log.info "webdav.conf found."
   fi
 else
+  config_dir=$default_config_dir
+
   bashio::log.info "Creating lighttpd.conf ..."
-  tempio \
-    -conf /data/options.json \
-    -template $lighttpd_template  \
-    -out /etc/lighttpd/lighttpd.conf
+  jq ".config_dir = \"$config_dir\"" /data/options.json \
+    | tempio \
+      -template $lighttpd_template  \
+      -out $config_dir/lighttpd.conf
   bashio::log.info "lighttpd.conf created."
+
   bashio::log.info "Creating webdav.conf ..."
   tempio \
     -conf /data/options.json \
     -template $webdav_template  \
-    -out /etc/lighttpd/webdav.conf
+    -out $config_dir/webdav.conf
   bashio::log.info "webdav.conf created."
 fi
 

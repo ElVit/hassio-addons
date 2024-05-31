@@ -1,8 +1,12 @@
 # Changelog
 
+## 1.2.3
+
+* 🐛 fixed issue #3 (lighttpd.conf.templ)
+
 ## 1.2.2
 
-* 🐛 fixed issue #3
+* 🐛 fixed issue #3 (webdav.sh)
 
 ## 1.2.1
 

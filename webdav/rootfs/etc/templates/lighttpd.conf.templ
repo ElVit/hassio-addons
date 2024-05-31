@@ -17,4 +17,4 @@ var.logdir            = "/config/log"
 accesslog.filename    = var.logdir + "/access.log"
 server.errorlog       = var.logdir  + "/error.log"
 
-include "/config/webdav.conf"
+include "{{ .config_dir }}/webdav.conf"
