@@ -1,5 +1,5 @@
 ---
-# https://github.com/hassio-addons/addon-base
+# https://github.com/hassio-addons/addon-base-nodejs
 build_from:
   aarch64: ghcr.io/hassio-addons/base-nodejs:0.2.5
   amd64: ghcr.io/hassio-addons/base-nodejs:0.2.5
