@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2
+
+* 📈 Updated hassio-addons/base to v17.0.2
+* 📈 Updated samba to v4.20.6-r1
+
 ## 1.3.1
 
 * 🧰 Code refactoring
