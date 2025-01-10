@@ -2,7 +2,7 @@
 
 ## 1.5.1
 
-* 📈 Use addon_base-nodejs 0.2.5
+* 🆕 Use hassio-addons/base-nodejs 0.2.5
 
 ## 1.5.0
 
