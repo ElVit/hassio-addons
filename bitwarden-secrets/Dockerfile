@@ -1,9 +1,9 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-nodejs:0.2.5
+FROM ${BUILD_FROM}
 
 ARG BW_CLI_VERSION
 
-RUN apk add --no-cache jq npm && \
+RUN apk add --no-cache jq && \
     npm install --no-progress --no-audit -g @bitwarden/cli@${BW_CLI_VERSION}
 
 COPY run.sh /
