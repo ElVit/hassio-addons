@@ -1,4 +1,4 @@
-name: 'Build and test the traefik addon'
+name: 'Build and test traefik addon'
 
 env:
   ADDON_DIRECTORY: traefik
@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    name: Test build of the traefik addon
+    name: Test build of traefik addon
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
