@@ -8,6 +8,7 @@ arch:
   - amd64
   - armv7
 init: false
+codenotary: notary@home-assistant.io
 startup: application
 stage: stable
 boot: auto
