@@ -10,8 +10,6 @@ Easily manage your Home Assistant secrets from Bitwarden.
 
 ![Build and test Bitwarden secrets for Home Assistant](https://github.com/elvit/hassio-addons/actions/workflows/build_bitwarden_secrets.yml/badge.svg?branch=main)
 
-https://github.com/elvit/hassio-addons/actions/workflows/build_bitwarden_secrets/badge.svg
-
 ## About
 
 Bitwarden is an open source password manager, which can easily be leveraged to manage your Home Assistant secrets and secret files.
