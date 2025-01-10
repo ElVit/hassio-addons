@@ -6,8 +6,11 @@ My home assistant addon repository.
 
 ## Installation
 
-Adding this add-ons repository to your Home Assistant instance is pretty easy.
-Follow [the official instructions][instructions] on the website of Home Assistant, and use the following URL:
+Adding this add-ons repository to your Home Assistant instance is pretty easy.  
+
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Felvit%2Fhassio-addons)
+
+Or follow [the official instructions][instructions] on the website of Home Assistant, and use the following URL:
 
 ```
 https://github.com/elvit/hassio-addons
@@ -17,6 +20,10 @@ https://github.com/elvit/hassio-addons
 
 [//]: # "ADDONLIST_START"
 
+### &#10003; [Bitwarden Secrets](bitwarden-secrets/)
+
+- Easily manage your Home Assistant secrets from Bitwarden / Vaultwarden.
+
 ### &#10003; [LFTP sync](lftp/)
 
 - A simple sync tool that uses the lftp command-line program.  
@@ -24,11 +31,11 @@ https://github.com/elvit/hassio-addons
 
 ### &#10003; [Rsync](rsync/)
 
-- Sync directories by using the [rsync](https://rsync.samba.org/) daemon.
+- Sync directories by using the rsync daemon.
 
 ### &#10003; [Samba server](samba/)
 
-- A simple samba (smb) server with modifiable configuration file.
+- A simple samba (smb)server with modifiable configuration file.
 
 ### &#10003; [Traefik](traefik/)
 
@@ -36,7 +43,7 @@ https://github.com/elvit/hassio-addons
 
 ### &#10003; [WebDAV server](webdav/)
 
-- A tiny WebDAV server using [lighttpd](https://www.lighttpd.net/).  
+- A tiny WebDAV server using lighttpd.
 
 [//]: # "ADDONLIST_END"
 
