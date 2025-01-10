@@ -1,0 +1,42 @@
+---
+name: Bitwarden secrets for Home Assistant
+version: 1.5.0
+slug: bitwarden-secrets
+description: Manage Home Assistant secrets easily from Bitwarden.
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+init: false
+startup: application
+stage: stable
+boot: auto
+url: https://github.com/ElVit/hassio-addons/tree/main/bitwarden-secrets
+hassio_role: default
+hassio_api: true
+map:
+  - addon_config:rw
+  - homeassistant_config:rw
+options:
+  log_level: info
+  bitwarden:
+    server: http://a0d7b954-bitwarden:7277/
+    username: homeassistant@localhost.lan
+    password: homeassistant
+    organization: Home Assistant
+  repeat:
+    enabled: false
+    interval: 3600
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  bitwarden:
+    server: str
+    username: str
+    password: str
+    organization: str
+  repeat:
+    enabled: bool
+    interval: int?
+  secrets_file: str?

@@ -2,7 +2,7 @@
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
+Follow these steps to get the add-on installed on your system:
 
 1. Click the Home Assistant My button below to open the add-on on your Home Assistant instance.   
    [![Open your Home Assistant instance and show the dashboard of an add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=7c7b7dd6_rsyncd&repository_url=https%3A%2F%2Fgithub.com%2Felvit%2Fhassio-addons)  

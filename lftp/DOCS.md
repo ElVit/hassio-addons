@@ -2,7 +2,7 @@
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.  
+Follow these steps to get the add-on installed on your system:
 
 1. Add this repository (`https://github.com/elvit/hassio-addons`) to your home assistant instance.
 2. Search for the "LFTP sync" add-on in the Supervisor add-on store and install it.

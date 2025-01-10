@@ -14,12 +14,12 @@
 
 ## 1.2.0
 
-* 🆕 Switched to lighttpd (based on https://github.com/jgeusebroek/docker-webdav/tree/master)  
+* 🆕 Switched to lighttpd (based on https://github.com/jgeusebroek/docker-webdav/tree/master)
 
 ## 1.1.0
 
-* 🆕 Added option 'config_file' and 'env_vars'  
+* 🆕 Added option 'config_file' and 'env_vars'
 
 ## 1.0.0
 
-* 🎉 Initial release (based on https://github.com/tadly/webdav/tree/master)  
+* 🎉 Initial release (based on https://github.com/tadly/webdav/tree/master)
