@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.4
+
+* 📈 Updated hassio-addons/base to v17.0.2
+* 📈 Updated lighttpd to v1.4.76-r0
+* 📈 Updated apache2-utils to v2.4.62-r0
+
 ## 1.2.3
 
 * 🐛 fixed issue #3 (lighttpd.conf.templ)
