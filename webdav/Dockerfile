@@ -1,43 +1,18 @@
-#################
-# 1 Build Image #
-#################
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:17.0.2
 
-ARG BUILD_FROM
-ARG BUILD_VERSION
 FROM ${BUILD_FROM}
 
-##################
-# 2 Modify Image #
-##################
+ARG LIGHTTP_VERSION=1.4.76-r0
+ARG APACHE_VERSION=2.4.62-r0
 
-# Set S6 wait time
-ENV S6_CMD_WAIT_FOR_SERVICES=1 \
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
-    S6_SERVICES_GRACETIME=0
-
-ENV LANG C.UTF-8
-
-USER root
-
-##################
-# 3 Install apps #
-##################
-
-ARG BUILD_ARCH
-
-# Install alpine packages
 RUN apk add --no-cache \
-        lighttpd \
+        lighttpd=${NGINX_VERSION} \
         lighttpd-mod_webdav \
         lighttpd-mod_auth \
         apache2-utils
 
 RUN mkdir -p /etc/lighttpd
 RUN touch /etc/lighttpd/.htpasswd
-
-##################
-# 4 Copy data #
-##################
 
 # Copy local files
 COPY rootfs/ /
@@ -56,16 +31,6 @@ RUN if [ -d /etc/cont-init.d ]; then \
       chmod -R 755 /etc/lighttpd; \
     fi
 
-################
-# 5 Entrypoint #
-################
-
-# NONE
-
-############
-# 5 Labels #
-############
-
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_DESCRIPTION
@@ -73,6 +38,7 @@ ARG BUILD_NAME
 ARG BUILD_REF
 ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
+
 LABEL \
     io.hass.name="${BUILD_NAME}" \
     io.hass.description="${BUILD_DESCRIPTION}" \
