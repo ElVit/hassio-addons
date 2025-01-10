@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1
+
+* 📈 Use addon_base-nodejs 0.2.5
+
 ## 1.5.0
 
 * 📈 Updated addon_base to 17.0.2
