@@ -1,44 +1,18 @@
-#################
-# 1 Build Image #
-#################
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:17.0.2
 
-ARG BUILD_FROM
-ARG BUILD_VERSION
 FROM ${BUILD_FROM}
 
-##################
-# 2 Modify Image #
-##################
-
-# Set S6 wait time
-ENV S6_CMD_WAIT_FOR_SERVICES=1 \
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
-    S6_SERVICES_GRACETIME=0
-
-ENV LANG C.UTF-8
-
-USER root
-
-##################
-# 3 Install apps #
-##################
-
-ARG BUILD_ARCH
-ARG SAMBA_VERSION
+ARG SAMBA_VERSION=4.20.6-r1
 
 RUN apk add --no-cache \
-            samba-common-tools \
-            samba-server
+        samba-common-tools=${SAMBA_VERSION} \
+        samba-server=${SAMBA_VERSION} \
 
 RUN mkdir -p /var/lib/samba
 RUN touch /etc/samba/lmhosts \
           /var/lib/samba/account_policy.tdb \
           /var/lib/samba/registry.tdb \
           /var/lib/samba/winbindd_idmap.tdb
-
-##################
-# 4 Copy data #
-##################
 
 # Copy local files
 COPY rootfs/ /
@@ -54,16 +28,6 @@ RUN if [ -d /etc/cont-init.d ]; then \
       chmod -R 755 /etc/templates; \
     fi
 
-################
-# 5 Entrypoint #
-################
-
-# NONE
-
-############
-# 5 Labels #
-############
-
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_DESCRIPTION
@@ -71,6 +35,7 @@ ARG BUILD_NAME
 ARG BUILD_REF
 ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
+
 LABEL \
     io.hass.name="${BUILD_NAME}" \
     io.hass.description="${BUILD_DESCRIPTION}" \
