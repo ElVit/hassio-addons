@@ -6,10 +6,10 @@ ARG LIGHTTP_VERSION=1.4.76-r0
 ARG APACHE_VERSION=2.4.62-r0
 
 RUN apk add --no-cache \
-        lighttpd=${NGINX_VERSION} \
-        lighttpd-mod_webdav \
-        lighttpd-mod_auth \
-        apache2-utils
+        lighttpd=${LIGHTTP_VERSION} \
+        lighttpd-mod_webdav=${LIGHTTP_VERSION} \
+        lighttpd-mod_auth=${LIGHTTP_VERSION} \
+        apache2-utils=${APACHE_VERSION}
 
 RUN mkdir -p /etc/lighttpd
 RUN touch /etc/lighttpd/.htpasswd
