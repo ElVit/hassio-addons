@@ -1,0 +1,33 @@
+name: 'Build and test webdav addon'
+
+env:
+  ADDON_DIRECTORY: webdav
+
+on:
+  push:
+    paths:
+      - 'webdav/**'
+    branches:
+      - main
+  pull_request:
+    paths:
+      - 'webdav/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Test build of webdav addon
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      # https://github.com/home-assistant/builder
+      - name: Test build
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --test \
+            --all \
+            --target /data/${ADDON_DIRECTORY} \
+            --docker-hub ghcr.io/elvit \
+            --image ${ADDON_DIRECTORY}-addon
