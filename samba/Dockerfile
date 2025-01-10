@@ -6,7 +6,7 @@ ARG SAMBA_VERSION=4.20.6-r1
 
 RUN apk add --no-cache \
         samba-common-tools=${SAMBA_VERSION} \
-        samba-server=${SAMBA_VERSION} \
+        samba-server=${SAMBA_VERSION}
 
 RUN mkdir -p /var/lib/samba
 RUN touch /etc/samba/lmhosts \
