@@ -3,8 +3,8 @@ FROM $BUILD_FROM
 
 ARG BW_CLI_VERSION
 
-RUN apk add --no-cache jq npm && \
-    npm install --no-audit -g @bitwarden/cli@${BW_CLI_VERSION}
+RUN apk add --no-cache python3 jq npm && \
+    npm install --no-progress --no-audit -g @bitwarden/cli@${BW_CLI_VERSION}
 
 COPY run.sh /
 RUN chmod a+x /run.sh
