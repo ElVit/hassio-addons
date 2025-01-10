@@ -1,7 +1,7 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/base-nodejs:0.2.5
 FROM ${BUILD_FROM}
 
-ARG BW_CLI_VERSION
+ARG BW_CLI_VERSION=2024.12.0
 
 RUN apk add --no-cache jq && \
     npm install --no-progress --no-audit -g @bitwarden/cli@${BW_CLI_VERSION}
