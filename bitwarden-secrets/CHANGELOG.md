@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.2
+
+* 🧰 Updated log output
+
 ## 1.5.1
 
 * 🆕 Use hassio-addons/base-nodejs 0.2.5
