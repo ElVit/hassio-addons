@@ -24,22 +24,23 @@ users:
     password: '!secret password'
 ```
 
-**HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
-At least for your password it is highly recommended to use it.
+> [!TIP]  
+> You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
+> At least for your password it is highly recommended to use it.  
 
-**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
+> [!TIP]  
+> Please be aware that if the path `/config/*` is used in the addon-configuration,  
+> this path is actually mapped to the directoy `/addon_configs/bb4914d7_webdav/`.  
 
 ## Modifying the lighttpd.conf and webdav.conf
 
 A full documentation how to write a config file can be found [here](https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs).  
-A default `lighttpd.conf` and `webdav.conf` is created in the addon config directory (e.g. `/addon_configs/xxxxxxxx_webdav/`) if they are not available there.  
-
-## Options:
+A default `lighttpd.conf` and `webdav.conf` is created in the addon config directory (e.g. `/addon_configs/bb4914d7_webdav/`) if they are not available there.  
 
 ### Option: `custom_config` (mandatory)
 
 Enable this option to use a custom `lighttpd.conf` and `webdav.conf`.  
-If there is no `lighttpd.conf` or `webdav.conf` in the directory `/addons_config/xxxxxxxx_webdav/`, a default `lighttpd.conf` or `webdav.conf` is created.  
+If there is no `lighttpd.conf` or `webdav.conf` in the directory `/addons_config/bb4914d7_webdav/`, a default `lighttpd.conf` or `webdav.conf` is created.  
 If this option is disabled, a default `lighttpd.conf` or `webdav.conf` is used to run this addon.  
 If this option is enabled, your current `lighttpd.conf` or `webdav.conf` will be used on next addon start.  
 

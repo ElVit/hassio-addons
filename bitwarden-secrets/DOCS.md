@@ -16,9 +16,12 @@ Follow these steps to get the add-on installed on your system:
 
 You will need to have a Bitwarden account to use. It is also recommended that you use the [Bitwarden Add-on](https://github.com/hassio-addons/addon-bitwarden) for Home Assistant for easy local access to all your secrets.
 
-> _**WARNING** Running this add-on will overwrite your `secrets.yaml` file and other secret files you retrieve from Bitwarden! Make a snapshot/backup of your Home Assistant configuration before proceeding._
+> [!WARNING]  
+> Running this add-on will overwrite your `secrets.yaml` file and other secret files you retrieve from Bitwarden!  
+> Make a snapshot/backup of your Home Assistant configuration before proceeding.  
 
-> _See my personal [Bitwarden set up](https://alex3305.github.io/home-assistant-docs/add-ons/bitwarden/) for more information regarding the Bitwarden setup._
+> [!TIP]  
+> See my personal [Bitwarden set up](https://alex3305.github.io/home-assistant-docs/add-ons/bitwarden/) for more information regarding the Bitwarden setup.  
 
 ### Bitwarden management
 
@@ -40,9 +43,11 @@ mariadb_username: 'mariadb_user'
 mariadb_password: 'this-is-my-database-password!'
 ```
 
-> _**NOTE** YAML formatting still applies!_
+> [!NOTE]  
+> YAML formatting still applies!  
 
-> _**NOTE** Refrain from using control characters inside item names._
+> [!NOTE]  
+> Refrain from using control characters inside item names.  
 
 Custom fields are also supported. The field type "Hidden" and "Text" are treated equally and their text will be written. The "Boolean" Field Type will be written as `true` or `false`. Example:
 
@@ -60,7 +65,8 @@ custom_fields_text: 'my text'
 custom_fields_hidden: 'secret text'
 custom_fields_boolean: 'true'
 ```
-> _**NOTE** The custom field type "Linked" is not supported yet._
+> [!NOTE]  
+> The custom field type "Linked" is not supported yet.  
 
 Besides creating a `secrets.yaml` file, you can also easily manage secret files. For every **Note** item in the Bitwarden vault, a secret file will be created from the _Name_ with the _Note contents_. For instance:
 
@@ -85,7 +91,8 @@ is parsed into `google_assistant_service_key.json` in your Home Assistant config
 }
 ```
 
-> _**NOTE** Subdirectories are support with forward slashes (ie. `config/rclone.conf`). The directories are created when necessary._
+> [!NOTE]  
+> Subdirectories are support with forward slashes (ie. `config/rclone.conf`). The directories are created when necessary.  
 
 ## Configuration
 

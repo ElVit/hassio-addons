@@ -23,12 +23,13 @@ credentials:
     password: '!secret password'
 ```
 
-**HINT**: You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
-At least for your password it is highly recommended to use it.
+> [!TIP]
+> You may also use [home assistant secrets](https://www.home-assistant.io/docs/configuration/secrets/) in your addon-configuration.  
+> At least for your password it is highly recommended to use it.
 
-**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
-
-## Options:
+> [!TIP]
+> Please be aware that if the path `/config/*` is used in the addon-configuration, 
+> this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
 
 ### Option: `script_dir`
 

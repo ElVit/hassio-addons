@@ -81,10 +81,9 @@ env_vars:
   - ANOTHER_ENV_VARIABLE=SOME-VALUE
 ```
 
-**HINT**: Please be aware that if the path `/config/*` is used in the addon-configuration, this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
-
-
-## Options:
+> [!TIP]  
+> Please be aware that if the path `/config/*` is used in the addon-configuration,  
+> this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
 
 ### Option `custom_static_config` (mandatory)
 
@@ -124,7 +123,8 @@ Enables insecure forwarding headers.
 When this option is enabled, the forwarded headers (`X-Forwarded-*`) will not be replaced by Traefik headers.  
 Only enable this option when you trust your forwarding proxy. 
 
-> ___Note__ for Cloudflare `X-Forwarded-*` proxied headers to work, this must be enabled._ 
+> [!NOTE]  
+> for Cloudflare `X-Forwarded-*` proxied headers to work, this must be enabled.  
 
 ### Option `letsencrypt.enabled` (mandatory)
 
@@ -135,7 +135,8 @@ You will also have to set the Let's Encrypt e-mail and challange type. Otherwise
 
 Your personal e-mail that you want to use for Let's Encrypt. 
 
-> _**Note** This is required when Let's Encrypt is enabled._ 
+> [!NOTE]  
+> This is required when Let's Encrypt is enabled.  
 
 ### Option `letsencrypt.challenge_type` (optional)
 
