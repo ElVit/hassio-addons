@@ -29,7 +29,7 @@ credentials:
 
 > [!TIP]
 > Please be aware that if the path `/config/*` is used in the addon-configuration, 
-> this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
+> this path is actually mapped to the directoy `/addon_configs/bb4914d7_lftp/`.  
 
 ### Option: `script_dir`
 

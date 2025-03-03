@@ -83,12 +83,12 @@ env_vars:
 
 > [!TIP]  
 > Please be aware that if the path `/config/*` is used in the addon-configuration,  
-> this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
+> this path is actually mapped to the directoy `/addon_configs/bb4914d7_traefik/`.  
 
 ### Option `custom_static_config` (mandatory)
 
 Enable this option to use a custom static configuration (traefik.yaml).  
-If there is no `traefik.yaml` in the directory `/addons_config/xxxxxxxx_traefik/`, a default `traefik.yaml` is created.  
+If there is no `traefik.yaml` in the directory `/addon_configs/bb4914d7_traefik/`, a default `traefik.yaml` is created.  
 If this option is disabled, a default `traefik.yaml` is created each time the addon is started.  
 If this option is enabled, your current `traefik.yaml` will be used on next addon start.  
 

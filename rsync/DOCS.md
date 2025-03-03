@@ -32,7 +32,7 @@ Since home assistant is also capable of mount SMB shares it is also possible to 
 
 > [!TIP]
 > Please be aware that if the path `/config/*` is used in the addon-configuration, 
-> this path is actually mapped to the directoy `/addon_configs/xxxxxxxx_webdav/` (`xxxxxxxx` is the hex value of the addon repository).  
+> this path is actually mapped to the directoy `/addon_configs/bb4914d7_rsync/`.  
 
 ## Executing a rsync command
 
@@ -41,7 +41,7 @@ To execute one of these rsync command you have to call the `hassio.addon_stdin` 
 ```yaml
 service: hassio.addon_stdin
 data:
-  addon: xxxxxxxx_rsyncd
+  addon: bb4914d7_rsync
   input: 0
 ```
 
@@ -50,7 +50,7 @@ In this example the first command will be executed.
 
 ## Modifying the rsyncd.conf
 
-A default `rsynd.conf` is created if there is no `rsync.d` file in the directory `/addons_config/xxxxxxxx_rsyncd/`.  
+A default `rsynd.conf` is created if there is no `rsync.d` file in the directory `/addon_configs/bb4914d7_rsync/`.  
 In the rsyncd.conf you can define directories which shall be exposed by the samba server.  
 A full documentation how to use rsync or how to write a rsyncd.conf can be found [here](https://rsync.samba.org/documentation.html).  
 

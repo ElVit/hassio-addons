@@ -40,7 +40,7 @@ A default `lighttpd.conf` and `webdav.conf` is created in the addon config direc
 ### Option: `custom_config` (mandatory)
 
 Enable this option to use a custom `lighttpd.conf` and `webdav.conf`.  
-If there is no `lighttpd.conf` or `webdav.conf` in the directory `/addons_config/bb4914d7_webdav/`, a default `lighttpd.conf` or `webdav.conf` is created.  
+If there is no `lighttpd.conf` or `webdav.conf` in the directory `/addon_configs/bb4914d7_webdav/`, a default `lighttpd.conf` or `webdav.conf` is created.  
 If this option is disabled, a default `lighttpd.conf` or `webdav.conf` is used to run this addon.  
 If this option is enabled, your current `lighttpd.conf` or `webdav.conf` will be used on next addon start.  
 

@@ -23,8 +23,8 @@
 
 * 🆕 Use the new Home Assistant directory "addon_configs" for storing the smb.conf
 * 💥 BREAKING CHANGE:  
-     Option `config_dir` was removed since the smb.conf will now be copied to the `addons_config` directory  
-     !!! Please copy your custom smb.conf to `/addons_config/xxxxxxxx_samba/` if you want keep your changes !!!  
+     Option `config_dir` was removed since the smb.conf will now be copied to the `addon_configs` directory  
+     !!! Please copy your custom smb.conf to `/addon_configs/bb4914d7_samba/` if you want keep your changes !!!  
 * 📈 Updated addon_base to 14.3.2
 
 ## 1.1.0
