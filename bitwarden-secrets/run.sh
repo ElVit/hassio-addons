@@ -33,14 +33,14 @@ else
   # Default to secrets.yaml
   SECRETS_FILE="/homeassistant/secrets.yaml"
   bashio::log.debug "Use default secrets file: ${SECRETS_FILE}."
-
 fi
 
 #
 # Script functions
 #
 
-function login {
+login()
+{
   bashio::log.debug "Configuring Bitwarden server..."
   bw config server ${BW_SERVER} &>/dev/null
 
@@ -57,7 +57,8 @@ function login {
   fi
 }
 
-function logout {
+logout()
+{
   # Unset the previously set environment variables
   unset BW_SESSION
   unset BW_ORG_ID
@@ -67,7 +68,8 @@ function logout {
   bashio::log.info "Logged out of Bitwarden."
 }
 
-function login_check {
+login_check()
+{
   bw login --check &>/dev/null
 
   if [ $? -eq 0 ]; then
@@ -78,7 +80,8 @@ function login_check {
   fi
 }
 
-function set_org_id {
+set_org_id()
+{
   bashio::log.debug "Retrieving organization id..."
   ORG=$(bw get organization "${BW_ORGANIZATION}" | jq -r '.id') 2>/dev/null
 
@@ -91,7 +94,8 @@ function set_org_id {
   fi
 }
 
-function generate_secrets {
+generate_secrets()
+{
   touch ${TEMP_SECRETS_FILE}
 
   printf "# Home Assistant secrets file\n" >> ${TEMP_SECRETS_FILE}
@@ -114,7 +118,8 @@ function generate_secrets {
   done
 }
 
-function generate_secret_files {
+generate_secret_files()
+{
   for row in $(bw list items --organizationid ${BW_ORG_ID} | jq -c '.[] | select(.type == 2) | [.name, (.notes|@base64)]')
   do
     file=$(echo $row | jq -r '.[0]')
@@ -129,7 +134,8 @@ function generate_secret_files {
   done
 }
 
-function write_field {
+write_field()
+{
   secret_name=${1}
   row_contents=${2}
   field_name=${3}
@@ -144,7 +150,8 @@ function write_field {
   fi
 }
 
-function write_uris {
+write_uris()
+{
   secret_name=${1}
   row_contents=${2}
 
@@ -164,7 +171,8 @@ function write_uris {
   fi
 }
 
-function write_custom_fields {
+write_custom_fields()
+{
   secret_name=${1}
   row_contents=${2}
 
