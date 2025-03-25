@@ -7,6 +7,154 @@ set +e
 # https://github.com/bitwarden/clients/issues/6689
 export NODE_OPTIONS="--no-deprecation"
 
+
+#
+# Script functions
+#
+
+login()
+{
+  bashio::log.debug "Configuring bitwarden server..."
+  bw config server ${BW_SERVER} &>/dev/null
+
+  bashio::log.debug "Logging into bitwarden..."
+  SESSION=$(bw login --raw ${BW_USERNAME} ${BW_PASSWORD}) &>/dev/null
+
+  if [ $? -eq 0 ]; then
+    bashio::log.info "Bitwarden login successful!"
+    export BW_SESSION=${SESSION}
+  else
+    echo ""
+    bashio::log.fatal "Bitwarden login failed. Exiting..."
+    exit 1
+  fi
+}
+
+logout()
+{
+  # Unset the previously set environment variables
+  unset BW_SESSION
+  unset BW_ORG_ID
+
+  # Logout and ignore possible errors
+  bw logout &>/dev/null
+  bashio::log.info "Logged out of bitwarden."
+}
+
+login_check()
+{
+  bw login --check &>/dev/null
+
+  if [ $? -eq 0 ]; then
+    bashio::log.debug "Logged in to bitwarden"
+  else
+    bashio::log.warning "Bitwarden login expired. Logging in again..."
+    login
+  fi
+}
+
+set_org_id()
+{
+  bashio::log.debug "Retrieving organization id..."
+  ORG=$(bw get organization "${BW_ORGANIZATION}" | jq -r '.id') 2>/dev/null
+
+  if [ $? -eq 0 ]; then
+    bashio::log.debug "Retrieved organization id for ${BW_ORGANIZATION}"
+    export BW_ORG_ID=${ORG}
+  else
+    bashio::log.fatal "Could not retrieve bitwarden organization ${BW_ORGANIZATION}. Exiting..."
+    exit 1
+  fi
+}
+
+generate_secrets()
+{
+  touch ${TEMP_SECRETS_FILE}
+  echo "# Home Assistant secrets file" >> ${TEMP_SECRETS_FILE}
+  echo "# DO NOT MODIFY -- managed by bitwarden secrets for Home Assistant add-on" >> ${TEMP_SECRETS_FILE}
+
+  for row in $(bw list items --organizationid ${BW_ORG_ID} | jq -c '.[] | select(.type == 1) | (.|@base64)'); do
+    if [[ -z "${row}" ]]; then
+      continue
+    fi  
+    printf "\n" >> ${TEMP_SECRETS_FILE}
+    row_contents=$(echo ${row} | jq -r '@base64d')
+    name=$(echo $row_contents | jq -r '.name' | tr '?:&,%@-' ' ' | tr '[]{}#*!|> ' '_' | tr -s '_' | tr '[:upper:]' '[:lower:]')
+
+    write_field "${name}" "${row_contents}" ".login.username" "username"
+    write_field "${name}" "${row_contents}" ".login.password" "password"
+    write_field "${name}" "${row_contents}" ".notes" "notes"
+    write_uris "${name}" "${row_contents}"
+    write_custom_fields "${name}" "${row_contents}"
+    bashio::log.trace "ROW: ${row_contents}"
+  done
+}
+
+generate_secret_files()
+{
+  for row in $(bw list items --organizationid ${BW_ORG_ID} | jq -c '.[] | select(.type == 2) | [.name, (.notes|@base64)]'); do
+    file=$(echo $row | jq -r '.[0]')
+    dirname=$(dirname $file)
+    basename=$(basename $file)
+
+    mkdir -p ${SECRETS_DIR}/${dirname}
+    rm -f ${SECRETS_DIR}/${dirname}/${basename}
+    echo ${row} | jq -r '.[1] | @base64d' > "${SECRETS_DIR}/${dirname}/${basename}"
+    chmod go-wrx "${SECRETS_DIR}/${dirname}/${basename}"
+  done
+}
+
+write_field()
+{
+  secret_name=${1}
+  row_contents=${2}
+  field_name=${3}
+  suffix=${4}
+
+  bashio::log.trace "Parsing row ${row_contents}"
+  field="$(echo ${row_contents} | jq -r ${field_name})"
+  if [ "${field}" != "null" ]; then
+    bashio::log.debug "Writing ${secret_name}_${suffix} with ${field}"
+    echo "${secret_name}_${suffix}: '${field}'" >> ${TEMP_SECRETS_FILE}
+  fi
+}
+
+write_uris()
+{
+  secret_name=${1}
+  row_contents=${2}
+
+  if [ "$(echo ${row_contents} | jq -r '.login.uris | length')" -gt "0" ]; then
+    i=1
+    for uris in $(echo ${row_contents} | jq -c '.login.uris | .[] | @base64' ); do
+      uri=$(echo ${uris} | jq -r '@base64d' |  jq -r '.uri')
+      if [ "${uri}" != "null" ]; then
+        bashio::log.debug "Writing ${secret_name}_uri_${i} with ${uri}"
+        echo "${secret_name}_uri_${i}: '${uri}'" >> ${TEMP_SECRETS_FILE}
+        ((i=i+1))
+      fi
+    done
+  fi
+}
+
+write_custom_fields()
+{
+  secret_name=${1}
+  row_contents=${2}
+
+  if [ "$(echo ${row_contents} | jq -r '.fields | length')" -gt "0" ]; then
+    for fields in $(echo ${row_contents} | jq -c '.fields | .[] | @base64'); do
+      field_contents=$(echo ${fields} | jq -r '@base64d')
+      field_name=$(echo ${field_contents} | jq -r '.name' | tr '?:&,%@-' ' ' | tr '[]{}#*!|> ' '_' | tr -s '_' | tr '[:upper:]' '[:lower:]')
+      field_value=$(echo ${field_contents} | jq -r '.value')
+      if [ "${field_name}" != "null" ] && [ "${field_value}" != "null" ]; then
+        bashio::log.debug "Writing ${secret_name}_${field_name} with ${field_value}"
+        echo "${secret_name}_${field_name}: '${field_value}'" >> ${TEMP_SECRETS_FILE}
+      fi
+    done
+  fi
+}
+
 #
 # Global variables
 #
@@ -35,166 +183,19 @@ else
   bashio::log.debug "Use default secrets file: ${SECRETS_FILE}."
 fi
 
-#
-# Script functions
-#
+SECRETS_DIR=$(dirname "$SECRETS_FILE")
+bashio::log.debug "Ensuring directory $SECRETS_DIR exists."
+mkdir -v -p $SECRETS_DIR
 
-login()
-{
-  bashio::log.debug "Configuring Bitwarden server..."
-  bw config server ${BW_SERVER} &>/dev/null
-
-  bashio::log.debug "Logging into Bitwarden..."
-  SESSION=$(bw login --raw ${BW_USERNAME} ${BW_PASSWORD}) &>/dev/null
-
-  if [ $? -eq 0 ]; then
-    bashio::log.info "Bitwarden login successful!"
-    export BW_SESSION=${SESSION}
-  else
-    echo ""
-    bashio::log.fatal "Bitwarden login failed. Exiting..."
-    exit 1
-  fi
-}
-
-logout()
-{
-  # Unset the previously set environment variables
-  unset BW_SESSION
-  unset BW_ORG_ID
-
-  # Logout and ignore possible errors
-  bw logout &>/dev/null
-  bashio::log.info "Logged out of Bitwarden."
-}
-
-login_check()
-{
-  bw login --check &>/dev/null
-
-  if [ $? -eq 0 ]; then
-    bashio::log.debug "Logged in to Bitwarden"
-  else
-    bashio::log.warning "Bitwarden login expired. Logging in again..."
-    login
-  fi
-}
-
-set_org_id()
-{
-  bashio::log.debug "Retrieving organization id..."
-  ORG=$(bw get organization "${BW_ORGANIZATION}" | jq -r '.id') 2>/dev/null
-
-  if [ $? -eq 0 ]; then
-    bashio::log.debug "Retrieved organization id for ${BW_ORGANIZATION}"
-    export BW_ORG_ID=${ORG}
-  else
-    bashio::log.fatal "Could not retrieve Bitwarden organization ${BW_ORGANIZATION}. Exiting..."
-    exit 1
-  fi
-}
-
-generate_secrets()
-{
-  touch ${TEMP_SECRETS_FILE}
-
-  printf "# Home Assistant secrets file\n" >> ${TEMP_SECRETS_FILE}
-  printf "# DO NOT MODIFY -- Managed by Bitwarden Secrets for Home Assistant add-on\n" >> ${TEMP_SECRETS_FILE}
-
-  for row in $(bw list items --organizationid ${BW_ORG_ID} | jq -c '.[] | select(.type == 1) | (.|@base64)'); do
-    printf "\n" >> ${TEMP_SECRETS_FILE}
-
-    row_contents=$(echo ${row} | jq -r '@base64d')
-    name=$(echo $row_contents | jq -r '.name' | tr '?:&,%@-' ' ' | tr '[]{}#*!|> ' '_' | tr -s '_' | tr '[:upper:]' '[:lower:]')
-
-    write_field "${name}" "${row_contents}" ".login.username" "username"
-    write_field "${name}" "${row_contents}" ".login.password" "password"
-    write_field "${name}" "${row_contents}" ".notes" "notes"
-
-    write_uris "${name}" "${row_contents}"
-    write_custom_fields "${name}" "${row_contents}"
-
-    bashio::log.trace "ROW: ${row_contents}"
-  done
-}
-
-generate_secret_files()
-{
-  for row in $(bw list items --organizationid ${BW_ORG_ID} | jq -c '.[] | select(.type == 2) | [.name, (.notes|@base64)]')
-  do
-    file=$(echo $row | jq -r '.[0]')
-    dirname=$(dirname $file)
-    basename=$(basename $file)
-
-    mkdir -p /config/${dirname}
-    rm -f /config/${dirname}/${basename}
-
-    echo ${row} | jq -r '.[1] | @base64d' > "/config/${dirname}/${basename}"
-    chmod go-wrx "/config/${dirname}/${basename}"
-  done
-}
-
-write_field()
-{
-  secret_name=${1}
-  row_contents=${2}
-  field_name=${3}
-  suffix=${4}
-
-  bashio::log.trace "Parsing row ${row_contents}"
-  field="$(echo ${row_contents} | jq -r ${field_name})"
-
-  if [ "${field}" != "null" ]; then
-    bashio::log.debug "Writing ${secret_name}_${suffix} with ${field}"
-    echo "${secret_name}_${suffix}: '${field}'" >> ${TEMP_SECRETS_FILE}
-  fi
-}
-
-write_uris()
-{
-  secret_name=${1}
-  row_contents=${2}
-
-  if [ "$(echo ${row_contents} | jq -r '.login.uris | length')" -gt "0" ]; then
-    i=1
-
-    for uris in $(echo ${row_contents} | jq -c '.login.uris | .[] | @base64' ); do
-      uri=$(echo ${uris} | jq -r '@base64d' |  jq -r '.uri')
-
-      if [ "${uri}" != "null" ]; then
-        bashio::log.debug "Writing ${secret_name}_uri_${i} with ${uri}"
-        echo "${secret_name}_uri_${i}: '${uri}'" >> ${TEMP_SECRETS_FILE}
-
-        ((i=i+1))
-      fi
-    done
-  fi
-}
-
-write_custom_fields()
-{
-  secret_name=${1}
-  row_contents=${2}
-
-  if [ "$(echo ${row_contents} | jq -r '.fields | length')" -gt "0" ]; then
-    for fields in $(echo ${row_contents} | jq -c '.fields | .[] | @base64'); do
-      field_contents=$(echo ${fields} | jq -r '@base64d')
-      field_name=$(echo ${field_contents} | jq -r '.name' | tr '?:&,%@-' ' ' | tr '[]{}#*!|> ' '_' | tr -s '_' | tr '[:upper:]' '[:lower:]')
-      field_value=$(echo ${field_contents} | jq -r '.value')
-
-      if [ "${field_name}" != "null" ] && [ "${field_value}" != "null" ]; then
-        bashio::log.debug "Writing ${secret_name}_${field_name} with ${field_value}"
-        echo "${secret_name}_${field_name}: '${field_value}'" >> ${TEMP_SECRETS_FILE}
-      fi
-    done
-  fi
-}
+TEMP_SECRETS_DIR=$(dirname "$TEMP_SECRETS_FILE")
+bashio::log.debug "Ensuring directory $TEMP_SECRETS_DIR exists."
+mkdir -v -p $TEMP_SECRETS_DIR
 
 #
 # Start of main loop
 #
 
-bashio::log.info "Start retrieving your Home Assistant secrets from Bitwarden"
+bashio::log.info "Start retrieving your Home Assistant secrets from bitwarden"
 login
 set_org_id
 
@@ -204,14 +205,14 @@ while true; do
   if [ ${num_of_items} -gt 0 ]; then
     bashio::log.debug "Generating ${SECRETS_FILE} file from login entries..."
     generate_secrets
-    bashio::log.debug "Home Assistant secrets generated."
+    bashio::log.debug "Secrets file generated."
 
     bashio::log.debug "Comparing newly generated secrets to ${SECRETS_FILE}..."
     if cmp -s -- "${TEMP_SECRETS_FILE}" "${SECRETS_FILE}"; then
       rm -f ${TEMP_SECRETS_FILE}
       bashio::log.info "No secrets changes detected."
     else
-      bashio::log.info "Changes from Bitwarden detected, replacing ${SECRETS_FILE}..."
+      bashio::log.info "Changes from bitwarden detected, replacing ${SECRETS_FILE}..."
       mv -f ${TEMP_SECRETS_FILE} ${SECRETS_FILE}
       chmod go-wrx ${SECRETS_FILE}
     fi
@@ -224,7 +225,7 @@ while true; do
     bashio::log.error "--------------------------------------"
     bashio::log.error "Ensure that you have:"
     bashio::log.error "  - At least 1 secret in your organisation ${BW_ORGANIZATION}"
-    bashio::log.error "  - Bitwarden is started when using the Bitwarden add-on"
+    bashio::log.error "  - Bitwarden is started when using the bitwarden add-on"
     bashio::log.error "--------------------------------------"
   fi
 
@@ -236,7 +237,7 @@ while true; do
   sleep "${REPEAT_INTERVAL}"
   login_check
 
-  bashio::log.debug "Syncing Bitwarden vault..."
+  bashio::log.debug "Syncing bitwarden vault..."
   bw sync &>/dev/null
   bashio::log.info "Bitwarden vault synced at: $(bw sync --last)"
 done
