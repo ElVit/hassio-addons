@@ -2,7 +2,7 @@ ARG BUILD_FROM=ghcr.io/hassio-addons/base:17.0.2
 
 FROM ${BUILD_FROM}
 
-ARG LIGHTTP_VERSION=1.4.76-r0
+ARG LIGHTTP_VERSION=1.4.79-r0
 ARG APACHE_VERSION=2.4.62-r0
 
 RUN apk add --no-cache \
