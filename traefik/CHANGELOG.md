@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.4
+
+* 📈 Updated hassio-addons/base to v17.2.5
+* 📈 Updated traefik to v3.1.7-r5
+* 📈 Updated nginx to v1.26.3-r0
+
 ## 1.3.3
 
 * 📈 Updated hassio-addons/base to v17.2.1
