@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.5
+
+* 📈 Updated hassio-addons/base to v17.2.5
+* 📈 Updated lighttpd to v1.4.79-r0
+
 ## 1.2.4
 
 * 📈 Updated hassio-addons/base to v17.0.2
