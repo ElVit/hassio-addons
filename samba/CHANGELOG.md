@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3
+
+* 📈 Updated hassio-addons/base to v17.2.5
+
 ## 1.3.2
 
 * 📈 Updated hassio-addons/base to v17.0.2
