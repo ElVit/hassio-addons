@@ -12,9 +12,9 @@ readonly static_template="/etc/templates/traefik.yaml.templ"
 readonly dynamic_template="/etc/templates/dynamic.yaml.templ"
 
 
-bashio::log.info "Show traefik version:"
+bashio::log.info "Using traefik version:"
 traefik version
-bashio::log.info "Show nginx version:"
+bashio::log.info "Using nginx version:"
 nginx -v
 
 bashio::log.info "Ensuring directory '$ssl_dir' exists ..."
