@@ -9,7 +9,7 @@ readonly lighttpd_template=/etc/templates/lighttpd.conf.templ
 readonly webdav_template=/etc/templates/webdav.conf.templ
 
 
-bashio::log.info "Show lighttpd version ..."
+bashio::log.info "Using lighttpd version:"
 lighttpd -v
 
 if ! bashio::config.has_value 'logins[0].username' || \
