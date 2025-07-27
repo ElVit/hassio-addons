@@ -2,14 +2,11 @@ ARG BUILD_FROM=ghcr.io/hassio-addons/base:17.0.2
 
 FROM ${BUILD_FROM}
 
-ARG LIGHTTP_VERSION=1.4.79-r0
-ARG APACHE_VERSION=2.4.62-r0
-
 RUN apk add --no-cache \
-        lighttpd=${LIGHTTP_VERSION} \
-        lighttpd-mod_webdav=${LIGHTTP_VERSION} \
-        lighttpd-mod_auth=${LIGHTTP_VERSION} \
-        apache2-utils=${APACHE_VERSION}
+        lighttpd \
+        lighttpd-mod_webdav \
+        lighttpd-mod_auth \
+        apache2-utils
 
 RUN mkdir -p /etc/lighttpd
 RUN touch /etc/lighttpd/.htpasswd
