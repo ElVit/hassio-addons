@@ -1,12 +1,11 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:17.0.2
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:18.0.3
 
 FROM ${BUILD_FROM}
 
-ARG SAMBA_VERSION=4.20.6-r1
-
+# Install packages
 RUN apk add --no-cache \
-        samba-common-tools=${SAMBA_VERSION} \
-        samba-server=${SAMBA_VERSION}
+        samba-common-tools \
+        samba-server
 
 RUN mkdir -p /var/lib/samba
 RUN touch /etc/samba/lmhosts \
