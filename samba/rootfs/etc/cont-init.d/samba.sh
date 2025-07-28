@@ -12,7 +12,7 @@ readonly config_file="$config_dir/smb.conf"
 readonly config_template="/etc/templates/smb.conf.templ"
 
 
-bashio::log.info "Show samba version:"
+bashio::log.info "Using samba version:"
 smbstatus --version
 
 if ! bashio::config.has_value 'logins[0].username' || \
