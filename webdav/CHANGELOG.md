@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.7
+
+* 📈 Updated hassio-addons/base to v18.0.3
+
 ## 1.2.6
 
 * 🐛 Use latest version in Dockerfile (fixes #8)
