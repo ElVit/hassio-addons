@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.6
+
+* 📈 Updated hassio-addons/base to v18.0.3
+
+## 1.3.5
+
+* 🐛 Use latest version in Dockerfile (fixes #8)
+
+## 1.3.4
+
+* 📈 Updated hassio-addons/base to v17.2.5
+* 📈 Updated traefik to v3.1.7-r5
+* 📈 Updated nginx to v1.26.3-r0
+
 ## 1.3.4
 
 * 📈 Updated hassio-addons/base to v17.2.5
