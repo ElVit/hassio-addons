@@ -5,7 +5,6 @@ description: Manage Home Assistant secrets easily from Bitwarden.
 arch:
   - aarch64
   - amd64
-  - armv7
 init: false
 codenotary: notary@home-assistant.io
 startup: application
