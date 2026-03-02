@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.3
+
+* ⚠️ Removed armv7 support
+
 ## 1.5.2
 
 * 🧰 Updated log output
