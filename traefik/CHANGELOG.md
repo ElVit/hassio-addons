@@ -2,7 +2,7 @@
 
 ## 1.3.7
 
-* ⚠️ Removed armv7 support
+* ⚠️ Drop support for armv7, armhf and i386  support
 
 ## 1.3.6
 
