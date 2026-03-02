@@ -1,5 +1,5 @@
 name: Bitwarden secrets for Home Assistant
-version: 1.5.2
+version: 1.5.3
 slug: bitwarden-secrets
 description: Manage Home Assistant secrets easily from Bitwarden.
 arch:
