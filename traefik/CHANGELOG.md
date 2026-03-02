@@ -35,7 +35,7 @@
 ## 1.3.1
 
 * 🧰 Code refactoring  
-     User tempio instead of gomplate.  
+     Use tempio instead of gomplate.  
 * 💥 BREAKING CHANGE:  
      Renamed option "custom_static_config" to "custom_config"  
 
