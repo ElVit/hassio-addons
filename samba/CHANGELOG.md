@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.5
+
+* ⚠️ Removed armv7 support
+
 ## 1.3.4
 
 * 📈 Updated hassio-addons/base to v18.0.3
