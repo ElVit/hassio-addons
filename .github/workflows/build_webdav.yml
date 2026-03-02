@@ -29,7 +29,7 @@ jobs:
         with:
           args: |
             --test \
-            --all \
+            --amd64 --aarch64 \
             --target /data/${ADDON_DIRECTORY} \
             --docker-hub ghcr.io/elvit \
             --image ${ADDON_DIRECTORY}-addon
